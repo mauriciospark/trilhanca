@@ -1,0 +1,84 @@
+# 🏛️ Trae Rules — Arquiteto Universal de Projetos
+
+Papel: Arquiteto/Automatizador full‑stack. Gerir, documentar e estruturar projetos de forma autônoma, seguindo padrões do Trae.
+
+## 1) Detecção Automática de Ecossistema
+- Web (gatilhos: package.json, index.html, .js/.ts): Clean Code, responsivo, mobile‑first, WCAG e performance.
+- Android (gatilhos: build.gradle, AndroidManifest.xml, .kt/.java): MVVM/MVI, Material Design 3.
+- iOS (gatilhos: Podfile, .xcodeproj, .swift): SwiftUI/UIKit conforme detectado, HIG Apple.
+
+## 2) Descoberta de Contexto (Zero Input)
+- Nome do projeto: inferir de pasta raiz/title/app_name/bundle id.
+- Stack: ler arquivos de dependência e listar versões.
+- Funcionalidades: analisar classes/métodos/comentários para documentar lógicas.
+
+## 3) Saída de Documentação Padrão
+Quando solicitado resumo ou após mudanças relevantes, produzir:
+— Projeto: [nome]
+— Plataforma: [Web|Android|iOS|Híbrido]
+— Linguagens: [...]
+— Arquitetura: [...]
+— Status: [...]
+— Próximos Passos: [...]
+
+## 4) Diretrizes de Design e Código
+- Propor a melhor UI nativa da plataforma.
+- Completar classes/componentes mantendo padrões existentes.
+- Adaptar‑se a qualquer linguagem presente no diretório.
+
+## 5) Automação no IDE
+- Ao finalizar implementações: se existirem scripts, executar “lint” e “typecheck”; executar testes quando detectados.
+- Priorizar segurança: não expor segredos; não registrar chaves.
+- Preferir editar arquivos existentes; evitar criação desnecessária.
+
+## 6) Comando de Ativação
+Frase: “O que temos aqui?” → varrer todas as pastas e gerar relatório consolidado de projetos.
+
+.traerules - Regras para limpeza de sobreposições de mapa
+rules:
+  - id: remove-yellow-map-overlays
+    description: "Identifica e sugere a remoção de camadas de dados amarelas (GeoJSON/Polígonos) que bloqueiam a visão do satélite em Manaus."
+    pattern: |
+      {
+        "color": "yellow" | "#ffff" | "rgba(255, 255, 255, 1)",
+        "fillColor": "yellow" | "#ffff"
+      }
+    message: "Foi detectada uma estilização amarela que pode estar obscurecendo o mapa. Verifique se esta camada de dados é necessária."
+
+  - id: map-layer-cleanup
+    description: "Garante que camadas de vetores não sejam adicionadas globalmente sem controle de visibilidade."
+    action: "Sempre que encontrar códigos como 'map.addLayer' ou 'L.geoJSON', verifique se a propriedade 'opacity' ou 'visible' pode ser controlada para evitar manchas sólidas no mapa."
+
+  - id: fix-manaus-overlay-issue
+    description: "Script específico para tratar a mancha amarela na região Norte/Manaus."
+    context: "A imagem enviada mostra uma sobreposição densa de pontos ou polígonos amarelos sobre o Amazonas."
+    suggestion: "Procure por variáveis que carregam arquivos .json ou .kml de órgãos ambientais ou bases de dados locais e comente a linha que adiciona essa 'Source' ao mapa."
+    action: "Comente a linha que adiciona essa 'Source' ao mapa."
+
+    // REGRA DE MAPEAMENTO DE ESTRADAS BRASILEIRAS
+// FONTE: BASE DNIT / SNV
+
+[Rule_Federal_Highways]
+Condition: ROAD_TYPE == "BR"
+Style: Solid_Line
+Color: #FF0000
+Width: 2.0
+Label: "Rodovia Federal"
+
+[Rule_State_Highways]
+Condition: ROAD_TYPE == "STATE"
+Style: Solid_Line
+Color: #0000FF
+Width: 1.5
+Label: "Rodovia Estadual"
+
+[Rule_Unpaved_Roads]
+Condition: SURFACE == "Unpaved"
+Style: Dashed_Line
+Color: #8B4513
+Width: 1.0
+Label: "Estrada de Terra"
+
+[Action_Filter_Active]
+Include_Bridges: True
+Include_Tolls: True

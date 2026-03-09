@@ -1,0 +1,20 @@
+name: trilhanca
+description: Super App Expedição
+publish_to: "none"
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  maplibre_gl: ^0.17.0
+  realm: ^1.5.0
+  record: ^5.0.4
+  nearby_connections: ^2.0.2
+  geolocator: ^12.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/styles/dark_style.json
+    - assets/tiles/expedicao.mbtiles

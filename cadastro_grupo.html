@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Grupo • Trilhança</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; background: #0f0f0f; color: #eaeaea; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    .site-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .brand { display: flex; align-items: center; gap: 8px; }
+    h1 { font-weight: 600; font-size: 1.6rem; margin: 0 0 16px; }
+    form { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(280px, 1fr)); }
+    .full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 6px; font-size: .95rem; color: #cfcfcf; }
+    input, select, textarea { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: #eaeaea; outline: none; font-size: 1rem; }
+    textarea { min-height: 100px; resize: vertical; }
+    .group { border: 1px solid #222; border-radius: 14px; padding: 14px; background: #141414; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .row > label { display: flex; align-items: center; gap: 10px; margin: 6px 0; background: #1a1a1a; padding: 10px 12px; border-radius: 12px; border: 1px solid #2a2a2a; cursor: pointer; }
+    .actions { display: flex; gap: 12px; }
+    button { padding: 16px 18px; border-radius: 14px; border: 0; background: #ff8a34; color: #111; font-weight: 700; cursor: pointer; font-size: 1rem; }
+    button.secondary { background: #2a2a2a; color: #ddd; }
+    .summary { margin-top: 16px; padding: 12px; border: 1px solid #222; border-radius: 12px; background: #121212; }
+    .cover { width: 140px; height: 96px; border-radius: 10px; overflow: hidden; border: 1px solid #333; background: #1a1a1a; background-size: cover; background-position: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand">
+        <img src="./favicoico/android-chrome-192x192.png" alt="Trilhança" style="width:32px;height:32px;border-radius:6px;border:1px solid #333">
+        <strong>Trilhança</strong>
+      </div>
+    </header>
+    <h1>Cadastro de Grupo</h1>
+    <form id="group-form">
+      <div class="full">
+        <label for="grupo-foto">Foto do Grupo</label>
+        <div class="row">
+          <input id="grupo-foto" name="grupo-foto" type="file" accept="image/*">
+          <div id="grupo-preview" class="cover"></div>
+        </div>
+      </div>
+      <div>
+        <label for="grupo-nome">Nome do Grupo</label>
+        <input id="grupo-nome" name="grupo-nome" type="text" placeholder="Ex.: Expedição Transamazon 2026" required>
+      </div>
+      <div>
+        <label for="partida">Ponto de Partida</label>
+        <input id="partida" name="partida" type="text" placeholder="Ex.: Manaus, AM" required>
+      </div>
+      <div>
+        <label for="destino">Destino Final</label>
+        <input id="destino" name="destino" type="text" placeholder="Ex.: Belém, PA" required>
+      </div>
+      <div>
+        <label for="saida">Data de Saída</label>
+        <input id="saida" name="saida" type="date" required>
+      </div>
+      <div>
+        <label for="chegada">Previsão de Chegada</label>
+        <input id="chegada" name="chegada" type="date">
+      </div>
+      <div class="group full">
+        <label>Tipo de Veículo Aceito</label>
+        <div class="row">
+          <label><input type="radio" name="veiculo-aceito" value="Apenas 4x4"> Apenas 4x4</label>
+          <label><input type="radio" name="veiculo-aceito" value="Qualquer veículo"> Qualquer veículo</label>
+          <label><input type="radio" name="veiculo-aceito" value="Apenas Motos"> Apenas Motos</label>
+        </div>
+      </div>
+      <div class="group full">
+        <label>Ritmo do Comboio</label>
+        <div class="row">
+          <label><input type="radio" name="ritmo" value="Aventureiro"> Aventureiro</label>
+          <label><input type="radio" name="ritmo" value="Expresso"> Expresso</label>
+          <label><input type="radio" name="ritmo" value="Caminhoneiro"> Caminhoneiro</label>
+        </div>
+      </div>
+      <div>
+        <label for="limite">Limite de Veículos</label>
+        <input id="limite" name="limite" type="number" min="1" step="1" placeholder="Ex.: 10">
+      </div>
+      <div>
+        <label for="carona">Vagas para Carona</label>
+        <select id="carona" name="carona">
+          <option value="">Selecione</option>
+          <option>Sim</option>
+          <option>Não</option>
+        </select>
+      </div>
+      <div class="full">
+        <label for="ponto-encontro">Ponto de Encontro Inicial</label>
+        <input id="ponto-encontro" name="ponto-encontro" type="text" placeholder="Ex.: Posto BR na saída de Manaus">
+      </div>
+      <div class="group full">
+        <div class="row">
+          <label><input type="checkbox" name="req-px"> Possuir rádio comunicador (PX/Talkabout)</label>
+          <label><input type="checkbox" name="req-comb"> Galão de combustível reserva</label>
+          <label><input type="checkbox" name="req-estepe"> Pneu de estepe extra</label>
+          <label><input type="checkbox" name="req-kit"> Kit de primeiros socorros</label>
+        </div>
+      </div>
+      <div class="full">
+        <textarea id="descricao" name="descricao" placeholder="Detalhes sobre a viagem ou regras do grupo"></textarea>
+      </div>
+      <h2 class="full">Membros do Grupo</h2>
+      <div class="full">
+        <div id="members-list"></div>
+        <div class="actions">
+          <button id="add-member" type="button" class="secondary">Adicionar Membro</button>
+        </div>
+      </div>
+      <div class="actions full">
+        <button type="submit">Salvar Grupo</button>
+        <button type="reset" class="secondary">Limpar</button>
+        <button type="button" class="secondary" id="voltar-perfil">Voltar para Perfil</button>
+      </div>
+    </form>
+    <div id="summary" class="summary" hidden></div>
+    <div id="share" class="actions full" hidden>
+      <button id="copy-link">Copiar link do grupo</button>
+      <button id="share-whatsapp" class="secondary">Enviar via WhatsApp</button>
+      <button id="share-sms" class="secondary">Enviar via SMS</button>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('group-form');
+    const summary = document.getElementById('summary');
+    const shareBox = document.getElementById('share');
+    const copyBtn = document.getElementById('copy-link');
+    const waBtn = document.getElementById('share-whatsapp');
+    const smsBtn = document.getElementById('share-sms');
+    function getRadio(name) {
+      const el = form.querySelector('input[name="'+name+'"]:checked');
+      return el ? el.value : '';
+    }
+    function b64urlEncode(str){
+      const b64 = btoa(unescape(encodeURIComponent(str)));
+      return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    }
+    function b64urlDecode(str){
+      const b64 = str.replace(/-/g,'+').replace(/_/g,'/') + (str.length%4===2?'==':str.length%4===3?'=':'');
+      return decodeURIComponent(escape(atob(b64)));
+    }
+    function bindImagePreview(inputId, previewId){
+      const input = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+      input.addEventListener('change', ()=>{
+        const file = input.files[0];
+        if(!file){ preview.style.backgroundImage = ''; return; }
+        const fr = new FileReader();
+        fr.onload = ()=>{
+          preview.style.backgroundImage = 'url('+fr.result+')';
+        };
+        fr.readAsDataURL(file);
+      });
+    }
+    bindImagePreview('grupo-foto','grupo-preview');
+    function addMemberRow(name, photoDataUrl){
+      const list = document.getElementById('members-list');
+      const row = document.createElement('div');
+      row.className = 'row';
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.placeholder = 'Nome do membro';
+      nameInput.value = name || '';
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      const preview = document.createElement('div');
+      preview.style.width = '64px';
+      preview.style.height = '64px';
+      preview.style.borderRadius = '50%';
+      preview.style.overflow = 'hidden';
+      preview.style.border = '1px solid #333';
+      preview.style.background = '#1a1a1a';
+      if(photoDataUrl){
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundPosition = 'center';
+        preview.style.backgroundImage = 'url('+photoDataUrl+')';
+      }
+      fileInput.addEventListener('change', ()=>{
+        const file = fileInput.files[0];
+        if(!file){ preview.style.backgroundImage = ''; return; }
+        const fr = new FileReader();
+        fr.onload = ()=>{
+          preview.style.backgroundSize = 'cover';
+          preview.style.backgroundPosition = 'center';
+          preview.style.backgroundImage = 'url('+fr.result+')';
+        };
+        fr.readAsDataURL(file);
+      });
+      row.appendChild(nameInput);
+      row.appendChild(fileInput);
+      row.appendChild(preview);
+      list.appendChild(row);
+    }
+    document.getElementById('add-member').addEventListener('click', ()=> addMemberRow());
+    (function initFromLink(){
+      const p = new URLSearchParams(location.search);
+      const g = p.get('grupo');
+      if(!g) return;
+      try{
+        const raw = b64urlDecode(g);
+        const data = JSON.parse(raw);
+        document.getElementById('grupo-nome').value = data.nome || '';
+        document.getElementById('partida').value = data.partida || '';
+        document.getElementById('destino').value = data.destino || '';
+        document.getElementById('saida').value = data.saida || '';
+        document.getElementById('chegada').value = data.chegada || '';
+        const va = data.veiculoAceito || '';
+        if(va){ const r = form.querySelector('input[name="veiculo-aceito"][value="'+va+'"]'); if(r) r.checked = true; }
+        const rt = data.ritmo || '';
+        if(rt){ const r2 = form.querySelector('input[name="ritmo"][value="'+rt+'"]'); if(r2) r2.checked = true; }
+        document.getElementById('limite').value = data.limite || '';
+        document.getElementById('carona').value = data.carona || '';
+        document.getElementById('ponto-encontro').value = data.pontoEncontro || '';
+        const req = data.requisitos || {};
+        form.querySelector('input[name="req-px"]').checked = !!req.px;
+        form.querySelector('input[name="req-comb"]').checked = !!req.combustivel;
+        form.querySelector('input[name="req-estepe"]').checked = !!req.estepe;
+        form.querySelector('input[name="req-kit"]').checked = !!req.kit;
+        document.getElementById('descricao').value = data.descricao || '';
+        summary.hidden = false;
+        summary.textContent = 'Grupo carregado: ' + (data.nome || '') + ' | ' + (data.partida || '') + ' → ' + (data.destino || '') + ' | Saída: ' + (data.saida || '');
+        shareBox.hidden = false;
+        const base = location.href.split('?')[0];
+        const link = base + '?grupo=' + encodeURIComponent(g);
+        copyBtn.onclick = async function(){
+          try{ await navigator.clipboard.writeText(link); alert('Link copiado'); }catch(e){ prompt('Copie o link:', link); }
+        };
+        waBtn.onclick = function(){
+          const msg = 'Convite para grupo: ' + (data.nome || '') + ' • ' + (data.partida || '') + ' → ' + (data.destino || '') + ' • Saída: ' + (data.saida || '') + ' • Link: ' + link;
+          const url = 'https://wa.me/?text=' + encodeURIComponent(msg);
+          window.open(url, '_blank');
+        };
+        smsBtn.onclick = function(){
+          const msg = 'Convite para grupo: ' + (data.nome || '') + ' • ' + (data.partida || '') + ' → ' + (data.destino || '') + ' • Saída: ' + (data.saida || '') + ' • Link: ' + link;
+          const url = 'sms:?body=' + encodeURIComponent(msg);
+          window.location.href = url;
+        };
+      }catch(_){}
+    })();
+    form.addEventListener('submit', async function(ev) {
+      ev.preventDefault();
+      let grupoFoto = null;
+      const gf = document.getElementById('grupo-foto').files[0];
+      if(gf){
+        grupoFoto = await new Promise((res, rej)=>{
+          const fr = new FileReader();
+          fr.onload = ()=> res(fr.result);
+          fr.onerror = rej;
+          fr.readAsDataURL(gf);
+        });
+      }
+      const members = [];
+      const list = document.getElementById('members-list');
+      for(const row of Array.from(list.children)){
+        const nameInput = row.querySelector('input[type="text"]');
+        const fileInput = row.querySelector('input[type="file"]');
+        const name = nameInput ? nameInput.value.trim() : '';
+        let photo = null;
+        const file = fileInput ? fileInput.files[0] : null;
+        if(file){
+          photo = await new Promise((res, rej)=>{
+            const fr = new FileReader();
+            fr.onload = ()=> res(fr.result);
+            fr.onerror = rej;
+            fr.readAsDataURL(file);
+          });
+        }
+        if(name){ members.push({name, photo}); }
+      }
+      const grupo = {
+        foto: grupoFoto,
+        nome: document.getElementById('grupo-nome').value,
+        partida: document.getElementById('partida').value,
+        destino: document.getElementById('destino').value,
+        saida: document.getElementById('saida').value,
+        chegada: document.getElementById('chegada').value,
+        veiculoAceito: getRadio('veiculo-aceito'),
+        ritmo: getRadio('ritmo'),
+        limite: document.getElementById('limite').value,
+        carona: document.getElementById('carona').value,
+        pontoEncontro: document.getElementById('ponto-encontro').value,
+        requisitos: {
+          px: form.querySelector('input[name="req-px"]').checked,
+          combustivel: form.querySelector('input[name="req-comb"]').checked,
+          estepe: form.querySelector('input[name="req-estepe"]').checked,
+          kit: form.querySelector('input[name="req-kit"]').checked
+        },
+        descricao: document.getElementById('descricao').value,
+        membros: members
+      };
+      try {
+        localStorage.setItem('grupo_viagem', JSON.stringify(grupo));
+        summary.hidden = false;
+        summary.textContent = 'Grupo salvo: ' + grupo.nome + ' | ' + grupo.partida + ' → ' + grupo.destino + ' | Saída: ' + grupo.saida;
+        const base = location.href.split('?')[0];
+        const encoded = b64urlEncode(JSON.stringify(grupo));
+        const link = base + '?grupo=' + encodeURIComponent(encoded);
+        shareBox.hidden = false;
+        copyBtn.onclick = async function(){
+          try{ await navigator.clipboard.writeText(link); alert('Link copiado'); }catch(e){ prompt('Copie o link:', link); }
+        };
+        waBtn.onclick = function(){
+          const msg = 'Convite para grupo: ' + grupo.nome + ' • ' + grupo.partida + ' → ' + grupo.destino + ' • Saída: ' + grupo.saida + ' • Link: ' + link;
+          const url = 'https://wa.me/?text=' + encodeURIComponent(msg);
+          window.open(url, '_blank');
+        };
+        smsBtn.onclick = function(){
+          const msg = 'Convite para grupo: ' + grupo.nome + ' • ' + grupo.partida + ' → ' + grupo.destino + ' • Saída: ' + grupo.saida + ' • Link: ' + link;
+          const url = 'sms:?body=' + encodeURIComponent(msg);
+          window.location.href = url;
+        };
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (e) {
+        alert('Falha ao salvar grupo');
+      }
+    });
+    document.getElementById('voltar-perfil').addEventListener('click', function(){
+      window.location.href = './perfil.html';
+    });
+  </script>
+</body>
+</html>

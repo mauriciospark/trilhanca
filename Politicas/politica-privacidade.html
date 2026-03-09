@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Trilhança</title>
+    <link rel="shortcut icon" href="./favicoico/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #007bff;
+            --text-color: #444;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --border-color: #e9ecef;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --error-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(30, 58, 114, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        main {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-background);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .card-content {
+            color: var(--text-color);
+        }
+
+        .card-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .card-content li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .card-content li::marker {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(42, 82, 152, 0.1));
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-color);
+            font-weight: 500;
+        }
+
+        .emphasis {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .link:hover {
+            border-bottom-color: var(--accent-color);
+        }
+
+        .commitment-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .commitment-item {
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .commitment-item:hover {
+            transform: translateX(8px);
+        }
+
+        .commitment-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 2rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i> Trilhança
+                </div>
+                <div class="subtitle">
+                    Política de Privacidade e Termos de Uso
+                </div>
+                <div class="last-updated">
+                    <i class="fas fa-clock"></i> Última atualização: 1 de Março de 2026
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2 class="card-title">Política de Privacidade</h2>
+                </div>
+                <div class="card-content">
+                    <p>
+                        A sua <span class="emphasis">privacidade é fundamental</span> para nós. É política do <strong>TRILHANÇA</strong> respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href="" class="link">TRILHANÇA</a>, e outros sites que possuímos e operamos.
+                    </p>
+                    <p>
+                        Solicitamos informações pessoais <span class="highlight">apenas quando realmente precisamos delas</span> para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.
+                    </p>
+                    <p>
+                        Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.
+                    </p>
+                    <p>
+                        <span class="emphasis">Não compartilhamos informações de identificação pessoal</span> publicamente ou com terceiros, exceto quando exigido por lei.
+                    </p>
+                    <p>
+                        O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas <a href="https://politicaprivacidade.com/" rel="noopener noreferrer" target="_blank" class="link">políticas de privacidade</a>.
+                    </p>
+                    <p>
+                        Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.
+                    </p>
+                    <p>
+                        O uso continuado de nosso site será considerado como <span class="highlight">aceitação de nossas práticas</span> em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contato conosco.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h2 class="card-title">Política de Anúncios</h2>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>
+                            O serviço <strong>Google AdSense</strong> que usamos para veicular publicidade usa um cookie DoubleClick para veicular anúncios mais relevantes em toda a Web e limitar o número de vezes que um determinado anúncio é exibido para você.
+                        </li>
+                        <li>
+                            Para mais informações sobre o Google AdSense, consulte as FAQs oficiais sobre privacidade do Google AdSense.
+                        </li>
+                        <li>
+                            Utilizamos anúncios para compensar os custos de funcionamento deste site e fornecer financiamento para futuros desenvolvimentos. Os cookies de publicidade comportamental usados por este site foram projetados para garantir que você forneça os anúncios mais relevantes sempre que possível, rastreando anonimamente seus interesses e apresentando coisas semelhantes que possam ser do seu interesse.
+                        </li>
+                        <li>
+                            Vários parceiros anunciam em nosso nome e os cookies de rastreamento de afiliados simplesmente nos permitem ver se nossos clientes acessaram o site através de um dos sites de nossos parceiros, para que possamos creditá-los adequadamente e, quando aplicável, permitir que nossos parceiros afiliados ofereçam qualquer promoção que possa fornecê-lo para fazer uma compra.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h2 class="card-title">Compromisso do Usuário</h2>
+                </div>
+                <div class="card-content">
+                    <p>
+                        O usuário se compromete a fazer uso adequado dos conteúdos e da informação que o <strong>TRILHANÇA</strong> oferece no site e com caráter enunciativo, mas não limitativo:
+                    </p>
+                    <ul class="commitment-list">
+                        <li class="commitment-item">
+                            <div class="commitment-title">
+                                <i class="fas fa-gavel"></i> A) Legalidade e Boa-fé
+                            </div>
+                            Não se envolver em atividades que sejam ilegais ou contrárias à boa fé e à ordem pública;
+                        </li>
+                        <li class="commitment-item">
+                            <div class="commitment-title">
+                                <i class="fas fa-shield-alt"></i> B) Conteúdo Adequado
+                            </div>
+                            Não difundir propaganda ou conteúdo de natureza racista, xenofóbica, jogos de sorte ou azar, qualquer tipo de pornografia ilegal, de apologia ao terrorismo ou contra os direitos humanos;
+                        </li>
+                        <li class="commitment-item">
+                            <div class="commitment-title">
+                                <i class="fas fa-shield-virus"></i> C) Proteção dos Sistemas
+                            </div>
+                            Não causar danos aos sistemas físicos (hardwares) e lógicos (softwares) do TRILHANÇA, de seus fornecedores ou terceiros, para introduzir ou disseminar vírus informáticos ou quaisquer outros sistemas de hardware ou software que sejam capazes de causar danos anteriormente mencionados.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h2 class="card-title">Mais Informações</h2>
+                </div>
+                <div class="card-content">
+                    <p>
+                        Esperamos que esteja esclarecido e, como mencionado anteriormente, se houver algo que você não tem certeza se precisa ou não, geralmente é mais seguro deixar os cookies ativados, caso interaja com um dos recursos que você usa em nosso site.
+                    </p>
+                    <p>
+                        Esta política é efetiva a partir de <span class="highlight">1 de Março de 2026</span>.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2026 Trilhança. Todos os direitos reservados.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="./mapa.html" class="footer-link">
+                        <i class="fas fa-map"></i> Mapa
+                    </a>
+                    <a href="./perfil.html" class="footer-link">
+                        <i class="fas fa-user"></i> Perfil
+                    </a>
+                    <a href="./Comunicações.html" class="footer-link">
+                        <i class="fas fa-comments"></i> Comunicações
+                    </a>
+                    <a href="mailto:contato@trilhanca.com" class="footer-link">
+                        <i class="fas fa-envelope"></i> Contato
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Scroll to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

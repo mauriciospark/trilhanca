@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRILHANÇA - Relógio Inteligente</title>
+    <link rel="shortcut icon" href="./favicoico/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #007bff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #444444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .watch-face {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .status-item i {
+            color: var(--accent-color);
+        }
+
+        .main-display {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compass-container {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .compass {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%);
+            border: 3px solid var(--accent-color);
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(to top, var(--danger-color) 0%, var(--danger-color) 50%, var(--text-primary) 50%, var(--text-primary) 100%);
+            transform: translate(-50%, -50%) rotate(0deg);
+            transform-origin: center bottom;
+            transition: transform 0.5s ease-out;
+            border-radius: 2px;
+        }
+
+        .compass-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .direction-text {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .info-value.danger {
+            color: var(--danger-color);
+        }
+
+        .info-value.warning {
+            color: var(--warning-color);
+        }
+
+        .info-value.success {
+            color: var(--success-color);
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        .action-btn.sos {
+            background: var(--danger-color);
+            grid-column: span 2;
+        }
+
+        .action-btn.sos:hover {
+            box-shadow: 0 4px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        .action-btn i {
+            font-size: 1.5rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .notification.error {
+            border-color: var(--danger-color);
+        }
+
+        .notification.success {
+            border-color: var(--success-color);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .battery-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .battery-bar {
+            width: 60px;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .battery-fill {
+            height: 100%;
+            background: var(--success-color);
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .battery-fill.low {
+            background: var(--danger-color);
+        }
+
+        .battery-fill.medium {
+            background: var(--warning-color);
+        }
+
+        .mode-indicator {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Modo Noturno */
+        body.night-mode {
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        body.night-mode .compass {
+            background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+            border-color: var(--success-color);
+            box-shadow: 0 0 30px rgba(40, 167, 69, 0.3);
+        }
+
+        body.night-mode .compass-needle {
+            background: linear-gradient(to top, var(--success-color) 0%, var(--success-color) 50%, var(--text-primary) 50%, var(--text-primary) 100%);
+        }
+
+        /* Responsividade para diferentes tamanhos de relógio */
+        @media (max-width: 420px) {
+            .watch-face {
+                padding: 0.5rem;
+            }
+            
+            .compass-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .info-value {
+                font-size: 1.2rem;
+            }
+            
+            .action-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-btn.sos {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="watch-face">
+        <!-- Barra de Status -->
+        <div class="status-bar">
+            <div class="status-item">
+                <i class="fas fa-signal"></i>
+                <span id="connection-status">Conectado</span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-users"></i>
+                <span id="group-status">3/5</span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-wifi"></i>
+                <span id="mesh-status">Mesh</span>
+            </div>
+        </div>
+
+        <!-- Indicador de Modo -->
+        <div class="mode-indicator" id="mode-indicator">
+            🚶 MODO TRILHA
+        </div>
+
+        <!-- Indicador de Bateria -->
+        <div class="battery-indicator">
+            <i class="fas fa-battery-three-quarters"></i>
+            <div class="battery-bar">
+                <div class="battery-fill" id="battery-fill" style="width: 75%"></div>
+            </div>
+        </div>
+
+        <!-- Display Principal -->
+        <div class="main-display">
+            <div class="compass-container">
+                <div class="compass">
+                    <div class="compass-needle" id="compass-needle"></div>
+                    <div class="compass-center"></div>
+                    <div class="direction-text" id="direction-text">N</div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Distância</div>
+                    <div class="info-value" id="distance">2.4 km</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Comboio</div>
+                    <div class="info-value" id="convoy-distance">150 m</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Altitude</div>
+                    <div class="info-value" id="altitude">847 m</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Velocidade</div>
+                    <div class="info-value" id="speed">4.2 km/h</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="action-buttons">
+            <button class="action-btn" id="ptt-btn">
+                <i class="fas fa-microphone"></i>
+                <span>PTT</span>
+            </button>
+            <button class="action-btn" id="light-btn">
+                <i class="fas fa-lightbulb"></i>
+                <span>Lanterna</span>
+            </button>
+            <button class="action-btn sos" id="sos-btn">
+                <i class="fas fa-exclamation-triangle pulse"></i>
+                <span>SOS EMERGÊNCIA</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sistema de Notificações -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        class TrilhancaWatch {
+            constructor() {
+                this.heading = 0;
+                this.distance = 2.4;
+                this.convoyDistance = 150;
+                this.altitude = 847;
+                this.speed = 4.2;
+                this.battery = 75;
+                this.isConnected = true;
+                this.groupSize = 5;
+                this.connectedMembers = 3;
+                this.isNightMode = false;
+                this.isTracking = true;
+                this.pttActive = false;
+                this.lightOn = false;
+                
+                this.initializeEventListeners();
+                this.startSimulation();
+                this.detectAmbientLight();
+            }
+
+            initializeEventListeners() {
+                // Botão PTT
+                document.getElementById('ptt-btn').addEventListener('click', () => {
+                    this.togglePTT();
+                });
+
+                // Botão Lanterna
+                document.getElementById('light-btn').addEventListener('click', () => {
+                    this.toggleLight();
+                });
+
+                // Botão SOS
+                document.getElementById('sos-btn').addEventListener('click', () => {
+                    this.activateSOS();
+                });
+
+                // Listener para eventos do celular
+                this.setupPhoneConnection();
+            }
+
+            setupPhoneConnection() {
+                // Simular conexão com o app do celular
+                window.addEventListener('message', (event) => {
+                    const data = event.data;
+                    
+                    switch(data.type) {
+                        case 'location_update':
+                            this.updateLocation(data.location);
+                            break;
+                        case 'convoy_update':
+                            this.updateConvoy(data.convoy);
+                            break;
+                        case 'battery_update':
+                            this.updateBattery(data.battery);
+                            break;
+                        case 'emergency_alert':
+                            this.handleEmergencyAlert(data.alert);
+                            break;
+                    }
+                });
+
+                // Solicitar dados iniciais
+                this.requestInitialData();
+            }
+
+            requestInitialData() {
+                // Simular requisição de dados ao app
+                console.log('Solicitando dados iniciais ao app TRILHANÇA...');
+                
+                // Simular resposta
+                setTimeout(() => {
+                    this.showNotification('Conectado ao app TRILHANÇA', 'success');
+                }, 1000);
+            }
+
+            updateLocation(location) {
+                this.heading = location.heading || 0;
+                this.altitude = location.altitude || 0;
+                this.speed = location.speed || 0;
+                
+                this.updateDisplay();
+            }
+
+            updateConvoy(convoy) {
+                this.convoyDistance = convoy.distance || 0;
+                this.connectedMembers = convoy.members || 0;
+                this.groupSize = convoy.total || 0;
+                
+                this.updateDisplay();
+            }
+
+            updateBattery(battery) {
+                this.battery = battery;
+                this.updateBatteryDisplay();
+            }
+
+            updateDisplay() {
+                // Atualizar bússola
+                const needle = document.getElementById('compass-needle');
+                needle.style.transform = `translate(-50%, -50%) rotate(${this.heading}deg)`;
+                
+                // Atualizar texto de direção
+                const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+                const index = Math.round(this.heading / 45) % 8;
+                document.getElementById('direction-text').textContent = directions[index];
+                
+                // Atualizar informações
+                document.getElementById('distance').textContent = `${this.distance.toFixed(1)} km`;
+                document.getElementById('convoy-distance').textContent = `${this.convoyDistance} m`;
+                document.getElementById('altitude').textContent = `${this.altitude} m`;
+                document.getElementById('speed').textContent = `${this.speed.toFixed(1)} km/h`;
+                
+                // Atualizar status do grupo
+                document.getElementById('group-status').textContent = `${this.connectedMembers}/${this.groupSize}`;
+            }
+
+            updateBatteryDisplay() {
+                const batteryFill = document.getElementById('battery-fill');
+                batteryFill.style.width = `${this.battery}%`;
+                
+                // Mudar cor baseada no nível
+                batteryFill.classList.remove('low', 'medium');
+                if (this.battery < 20) {
+                    batteryFill.classList.add('low');
+                } else if (this.battery < 50) {
+                    batteryFill.classList.add('medium');
+                }
+                
+                // Atualizar ícone
+                const batteryIcon = document.querySelector('.battery-indicator i');
+                if (this.battery > 75) {
+                    batteryIcon.className = 'fas fa-battery-full';
+                } else if (this.battery > 50) {
+                    batteryIcon.className = 'fas fa-battery-three-quarters';
+                } else if (this.battery > 25) {
+                    batteryIcon.className = 'fas fa-battery-half';
+                } else {
+                    batteryIcon.className = 'fas fa-battery-quarter';
+                }
+            }
+
+            togglePTT() {
+                this.pttActive = !this.pttActive;
+                const btn = document.getElementById('ptt-btn');
+                
+                if (this.pttActive) {
+                    btn.style.background = 'var(--danger-color)';
+                    btn.innerHTML = '<i class="fas fa-microphone-slash"></i><span>TRANSMITINDO</span>';
+                    this.showNotification('PTT Ativado - Falando...', 'success');
+                    
+                    // Simular transmissão
+                    this.simulatePTTTransmission();
+                } else {
+                    btn.style.background = 'var(--accent-color)';
+                    btn.innerHTML = '<i class="fas fa-microphone"></i><span>PTT</span>';
+                    this.showNotification('PTT Desativado', 'info');
+                }
+            }
+
+            simulatePTTTransmission() {
+                if (!this.pttActive) return;
+                
+                // Simular envio de áudio para o grupo
+                console.log('Transmitindo áudio PTT para o comboio...');
+                
+                // Feedback visual
+                const status = document.getElementById('connection-status');
+                const originalText = status.textContent;
+                status.textContent = 'Transmitindo...';
+                status.style.color = 'var(--success-color)';
+                
+                setTimeout(() => {
+                    if (this.pttActive) {
+                        status.textContent = originalText;
+                        status.style.color = '';
+                    }
+                }, 2000);
+            }
+
+            toggleLight() {
+                this.lightOn = !this.lightOn;
+                const btn = document.getElementById('light-btn');
+                
+                if (this.lightOn) {
+                    btn.style.background = 'var(--warning-color)';
+                    btn.innerHTML = '<i class="fas fa-lightbulb"></i><span>DESLIGAR</span>';
+                    this.showNotification('Lanterna Ativada', 'warning');
+                    
+                    // Ativar modo noturno automaticamente
+                    if (!this.isNightMode) {
+                        this.toggleNightMode();
+                    }
+                } else {
+                    btn.style.background = 'var(--accent-color)';
+                    btn.innerHTML = '<i class="fas fa-lightbulb"></i><span>LANTERNA</span>';
+                    this.showNotification('Lanterna Desativada', 'info');
+                }
+            }
+
+            activateSOS() {
+                this.showNotification('🚨 EMERGÊNCIA ATIVADA! 🚨', 'error');
+                
+                // Simular envio de SOS
+                console.log('ENVIANDO SINAL DE EMERGÊNCIA...');
+                console.log('Localização:', {
+                    latitude: this.latitude,
+                    longitude: this.longitude,
+                    altitude: this.altitude,
+                    timestamp: new Date().toISOString()
+                });
+                console.log('Enviando para:', this.connectedMembers, 'membros do comboio');
+                
+                // Feedback visual intenso
+                document.body.style.animation = 'pulse 0.5s ease 3';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 1500);
+                
+                // Simular resposta
+                setTimeout(() => {
+                    this.showNotification('🚁 SOS recebido pelo comboio! Resgate a caminho.', 'success');
+                }, 3000);
+            }
+
+            toggleNightMode() {
+                this.isNightMode = !this.isNightMode;
+                document.body.classList.toggle('night-mode');
+                
+                const modeIndicator = document.getElementById('mode-indicator');
+                modeIndicator.textContent = this.isNightMode ? '🌙 MODO NOTURNO' : '🚶 MODO TRILHA';
+            }
+
+            detectAmbientLight() {
+                // Simular detecção de luz ambiente
+                setInterval(() => {
+                    const hour = new Date().getHours();
+                    const shouldNightMode = hour < 6 || hour > 18;
+                    
+                    if (shouldNightMode !== this.isNightMode) {
+                        this.toggleNightMode();
+                    }
+                }, 60000); // Verificar a cada minuto
+            }
+
+            startSimulation() {
+                // Simular atualização de dados
+                setInterval(() => {
+                    // Simular mudança de direção
+                    this.heading = (this.heading + (Math.random() - 0.5) * 10) % 360;
+                    if (this.heading < 0) this.heading += 360;
+                    
+                    // Simular variação de velocidade
+                    this.speed = Math.max(0, this.speed + (Math.random() - 0.5) * 0.5);
+                    
+                    // Simular variação de altitude
+                    this.altitude = Math.max(0, this.altitude + (Math.random() - 0.5) * 5);
+                    
+                    // Simular variação de distância
+                    this.distance = Math.max(0, this.distance + (Math.random() - 0.3) * 0.1);
+                    
+                    // Simular variação do comboio
+                    this.convoyDistance = Math.max(0, this.convoyDistance + (Math.random() - 0.5) * 20);
+                    
+                    this.updateDisplay();
+                }, 2000); // Atualizar a cada 2 segundos
+                
+                // Simular consumo de bateria
+                setInterval(() => {
+                    if (this.battery > 0) {
+                        this.battery = Math.max(0, this.battery - Math.random() * 0.5);
+                        this.updateBatteryDisplay();
+                        
+                        if (this.battery < 20) {
+                            this.showNotification('⚠️ Bateria Baixa! (< 20%)', 'error');
+                        }
+                    }
+                }, 30000); // Verificar bateria a cada 30 segundos
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification show ${type}`;
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+
+            handleEmergencyAlert(alert) {
+                this.showNotification(`🚨 Alerta de Emergência: ${alert.message}`, 'error');
+                
+                // Vibração (simulada)
+                document.body.style.animation = 'pulse 0.5s ease 5';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 2500);
+            }
+
+            // Método para receber dados do app TRILHANÇA
+            receiveFromApp(data) {
+                console.log('Dados recebidos do app:', data);
+                
+                switch(data.type) {
+                    case 'trail_start':
+                        this.startTrailMode();
+                        break;
+                    case 'trail_end':
+                        this.endTrailMode();
+                        break;
+                    case 'sync_route':
+                        this.syncRoute(data.route);
+                        break;
+                }
+            }
+
+            startTrailMode() {
+                this.isTracking = true;
+                this.showNotification('🚶 Modo Trilha Iniciado', 'success');
+                document.getElementById('mode-indicator').textContent = '🚶 MODO TRILHA';
+            }
+
+            endTrailMode() {
+                this.isTracking = false;
+                this.showNotification('🏁 Modo Trilha Finalizado', 'info');
+                document.getElementById('mode-indicator').textContent = '🚗 MOTO';
+            }
+
+            syncRoute(route) {
+                this.showNotification('📍 Rota sincronizada do app', 'success');
+                console.log('Rota recebida:', route);
+            }
+        }
+
+        // Inicializar o relógio
+        const watch = new TrilhancaWatch();
+    </script>
+</body>
+</html>

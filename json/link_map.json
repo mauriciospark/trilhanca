@@ -1,0 +1,126 @@
+{
+  "maps": [
+    {
+      "id": "mapa-001",
+      "name": "Mapa Principal - Trilhança",
+      "url": "./mapa.html",
+      "type": "local",
+      "description": "Mapa principal do sistema Trilhança com todas as funcionalidades",
+      "category": "principal",
+      "tags": ["principal", "leaflet", "gps", "rastreamento"],
+      "date_added": "2026-02-26T12:05:00Z",
+      "last_accessed": null,
+      "access_count": 0,
+      "favorite": false,
+      "coordinates": {
+        "center": [-23.5505, -46.6333],
+        "zoom": 13
+      },
+      "features": [
+        "GPS em tempo real",
+        "Rastreamento de comboio",
+        "Biblioteca de mapas",
+        "Relatos de condições",
+        "Upload de GeoJSON",
+        "Rotas e navegação"
+      ],
+      "thumbnail": "./imagens/thumbnails/mapa-principal.jpg",
+      "author": "Trilhança System",
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "id": "mapa-002", 
+      "name": "Mapa de Rotas",
+      "url": "./mapas/rotas.html",
+      "type": "local",
+      "description": "Mapa especializado em planejamento de rotas e logística",
+      "category": "rotas",
+      "tags": ["rotas", "logistica", "planejamento"],
+      "date_added": "2026-02-26T12:05:00Z",
+      "last_accessed": null,
+      "access_count": 0,
+      "favorite": false,
+      "coordinates": {
+        "center": [-23.5505, -46.6333],
+        "zoom": 10
+      },
+      "features": [
+        "Planejamento de rotas",
+        "Otimização logística",
+        "Cálculo de distâncias",
+        "Múltiplas paradas"
+      ],
+      "thumbnail": "./imagens/thumbnails/mapa-rotas.jpg",
+      "author": "Trilhança System",
+      "version": "1.0.0",
+      "status": "active"
+    },
+    {
+      "id": "mapa-003",
+      "name": "Mapa de Monitoramento",
+      "url": "./mapas/monitoramento.html", 
+      "type": "local",
+      "description": "Painel de monitoramento em tempo real da frota",
+      "category": "monitoramento",
+      "tags": ["monitoramento", "frota", "tempo-real"],
+      "date_added": "2026-02-26T12:05:00Z",
+      "last_accessed": null,
+      "access_count": 0,
+      "favorite": false,
+      "coordinates": {
+        "center": [-23.5505, -46.6333],
+        "zoom": 12
+      },
+      "features": [
+        "Monitoramento em tempo real",
+        "Posição da frota",
+        "Alertas e notificações",
+        "Histórico de movimentação"
+      ],
+      "thumbnail": "./imagens/thumbnails/mapa-monitoramento.jpg",
+      "author": "Trilhança System", 
+      "version": "1.0.0",
+      "status": "active"
+    }
+  ],
+  "categories": [
+    {
+      "id": "principal",
+      "name": "Principal",
+      "description": "Mapas principais do sistema",
+      "icon": "🗺️",
+      "color": "#007bff"
+    },
+    {
+      "id": "rotas",
+      "name": "Rotas",
+      "description": "Mapas de planejamento de rotas",
+      "icon": "🛣️",
+      "color": "#28a745"
+    },
+    {
+      "id": "monitoramento",
+      "name": "Monitoramento",
+      "description": "Mapas de monitoramento em tempo real",
+      "icon": "📡",
+      "color": "#dc3545"
+    }
+  ],
+  "settings": {
+    "default_map": "mapa-001",
+    "auto_load_favorites": true,
+    "show_thumbnails": true,
+    "enable_statistics": true,
+    "cache_duration": 3600,
+    "max_maps_per_page": 20
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created_at": "2026-02-26T12:05:00Z",
+    "updated_at": "2026-02-26T12:05:00Z",
+    "total_maps": 3,
+    "total_categories": 3,
+    "author": "Trilhança System"
+  }
+}

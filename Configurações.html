@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações • Trilhança</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/Configurações.css">
+    <meta name="theme-color" content="#007bff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Trilhança">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="brand">
+                <img src="./Trilhança.png" alt="TRILHANÇA" class="logo">
+                <div class="brand-text">
+                    <h1>Configurações</h1>
+                    <span class="subtitle">Controle Central do Aplicativo</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="save-all-btn" title="Salvar Todas">
+                    <i class="fas fa-save"></i>
+                </button>
+                <button class="btn-icon" id="reset-all-btn" title="Redefinir">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <button class="btn-icon" id="export-config-btn" title="Exportar">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+        </header>
+        <!--Cabeçalho-->
+        <!-- Guias De Navegação -->
+        <nav class="config-nav" role="navigation" aria-label="Configurações">
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="general" role="tab" aria-selected="true" aria-controls="general-tab">
+                    <i class="fas fa-cog"></i>
+                    Geral
+                </button>
+                <button class="tab-btn" data-tab="profile" role="tab" aria-selected="false" aria-controls="profile-tab">
+                    <i class="fas fa-user"></i>
+                    Perfil
+                </button>
+                <button class="tab-btn" data-tab="security" role="tab" aria-selected="false" aria-controls="security-tab">
+                    <i class="fas fa-shield-alt"></i>
+                    Segurança
+                </button>
+                <button class="tab-btn" data-tab="notifications" role="tab" aria-selected="false" aria-controls="notifications-tab">
+                    <i class="fas fa-bell"></i>
+                    Notificações
+                </button>
+                <button class="tab-btn" data-tab="privacy" role="tab" aria-selected="false" aria-controls="privacy-tab">
+                    <i class="fas fa-lock"></i>
+                    Privacidade
+                </button>
+                <button class="tab-btn" data-tab="appearance" role="tab" aria-selected="false" aria-controls="appearance-tab">
+                    <i class="fas fa-palette"></i>
+                    Aparência
+                </button>
+                <button class="tab-btn" data-tab="advanced" role="tab" aria-selected="false" aria-controls="advanced-tab">
+                    <i class="fas fa-tools"></i>
+                    Avançado
+                </button>
+            </div>
+            <div class="nav-actions">
+                <a href="./perfil.html" class="btn-back-to-profile" role="button">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar ao Perfil
+                </a>
+            </div>
+        </nav>
+        <!-- Guias De Navegação -->
+        <!-- configurações Gerais -->
+        <section class="tab-content active" id="general-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-cog"></i>
+                    Configurações Gerais
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Idioma e Região</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Idioma do Aplicativo</span>
+                            <select class="config-select" id="language-select">
+                                <option value="pt-BR">Português (Brasil)</option>
+                                <option value="en-US">English (US)</option>
+                                <option value="es-ES">Español</option>
+                                <option value="fr-FR">Français</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Fuso Horário</span>
+                            <select class="config-select" id="timezone-select">
+                                <option value="America/Sao_Paulo">Brasília (GMT-3)</option>
+                                <option value="America/New_York">Nova York (GMT-5)</option>
+                                <option value="Europe/London">Londres (GMT+0)</option>
+                                <option value="Asia/Tokyo">Tóquio (GMT+9)</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- configurações de funcionalidades -->
+                <div class="config-section">
+                    <h3>Funcionalidades</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Modo Offline</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="offline-mode">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Permite usar o aplicativo sem conexão com a internet</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Sincronização Automática</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="auto-sync" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Sincroniza dados automaticamente quando online</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Backup na Nuvem</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="cloud-backup" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Faz backup automático dos dados na nuvem</p>
+                    </div>
+                </div>
+                <!-- configurações de funcionalidades -->
+                <!-- configurações de desempenho -->
+                <div class="config-section">
+                    <h3>Desempenho</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Qualidade de Imagens</span>
+                            <select class="config-select" id="image-quality">
+                                <option value="high">Alta</option>
+                                <option value="medium" selected>Média</option>
+                                <option value="low">Baixa</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Cache de Dados</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="data-cache" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Armazena dados localmente para melhor performance</p>
+                    </div>
+                </div>
+                <!-- configurações de desempenho -->
+            </div>
+        </section>
+        <!--configurações Gerais-->
+        <!-- configurações do perfil -->
+        <section class="tab-content" id="profile-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-user"></i>
+                    Configurações do Perfil
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Informações Pessoais</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Nome Completo</span>
+                            <input type="text" class="config-input" id="full-name" placeholder="Seu nome completo" data-profile-field="name">
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Email</span>
+                            <input type="email" class="config-input" id="email" placeholder="seu@email.com" data-profile-field="email">
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">    
+                            <span>Telefone Principal</span>
+                            <div class="phone-input-container">
+                                <div class="phone-visual" id="phone-visual">
+                                    <span class="phone-flag" id="phone-flag">🇧🇷</span>
+                                    <span class="phone-info" id="phone-info">+55</span>
+                                </div>
+                                <input type="tel" class="config-input phone-input" id="telefone1" name="telefone1" 
+                                       placeholder="(00) 00000-0000" data-profile-field="telefone1">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Data de Nascimento</span>
+                            <input type="date" class="config-input" id="birthdate" data-profile-field="birthdate">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Foto do Perfil</h3>
+                    <div class="profile-photo-section">
+                        <div class="photo-preview">
+                            <img src="/icon/Usuario.png" alt="Foto de Perfil" id="profile-photo">
+                            <div class="photo-overlay">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <div class="photo-controls">
+                            <button class="btn-secondary" id="change-photo-btn">
+                                <i class="fas fa-upload"></i>
+                                Alterar Foto
+                            </button>
+                            <button class="btn-danger" id="remove-photo-btn">
+                                <i class="fas fa-trash"></i>
+                                Remover Foto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Biografia</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Sobre Você</span>
+                            <textarea class="config-textarea" id="bio" placeholder="Conte um pouco sobre você..." rows="4"></textarea>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Preferências de Exibição</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Exibir Email Publicamente</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="public-email">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Exibir Telefone Publicamente</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="public-phone">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Perfil Privado</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="private-profile">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Apenas contatos podem ver seu perfil completo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- configurações do perfil -->
+        <!-- configurações de segurança -->
+        <section class="tab-content" id="security-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Configurações de Segurança
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Autenticação</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Autenticação de Dois Fatores</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="two-factor">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Requer código adicional ao fazer login</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Biometria</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="biometric-auth">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Usar impressão digital ou reconhecimento facial</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Login Automático</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="auto-login">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Mantém sessão ativa por 30 dias</p>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Senha</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Alterar Senha</span>
+                            <button class="btn-secondary" id="change-password-btn">
+                                <i class="fas fa-key"></i>
+                                Alterar Senha
+                            </button>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Exigir Senha Forte</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="strong-password" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Expiração de Senha</span>
+                            <select class="config-select" id="password-expiry">
+                                <option value="never">Nunca</option>
+                                <option value="90">90 dias</option>
+                                <option value="180" selected>180 dias</option>
+                                <option value="365">1 ano</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Sessões Ativas</h3>
+                    <div class="active-sessions">
+                        <div class="session-item">
+                            <div class="session-info">
+                                <div class="session-device">
+                                    <i class="fas fa-laptop"></i>
+                                    <span>Chrome - Windows</span>
+                                </div>
+                                <div class="session-location">São Paulo, Brasil</div>
+                                <div class="session-time">Ativo agora</div>
+                            </div>
+                            <button class="btn-danger btn-sm">Terminar</button>
+                        </div>
+                        <div class="session-item">
+                            <div class="session-info">
+                                <div class="session-device">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>App Android</span>
+                                </div>
+                                <div class="session-location">Rio de Janeiro, Brasil</div>
+                                <div class="session-time">2 horas atrás</div>
+                            </div>
+                            <button class="btn-danger btn-sm">Terminar</button>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" id="terminate-all-sessions">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Terminar Todas as Sessões
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- configurações de segurança -->
+        <!-- configurações de notificações -->
+        <section class="tab-content" id="notifications-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-bell"></i>
+                    Configurações de Notificações
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Notificações Push</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Notificações Push</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="push-notifications" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Novas Mensagens</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="new-messages" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Atualizações de Trilha</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="trail-updates" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Novos Contatos</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="new-contacts">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Notificações por Email</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Resumo Diário</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="daily-summary">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Alertas de Segurança</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="security-alerts" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Atualizações do Sistema</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="system-updates">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Horários de Notificação</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Modo Silencioso</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="silent-mode">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Início do Silêncio</span>
+                            <input type="time" class="config-input" id="silent-start" value="22:00">
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Fim do Silêncio</span>
+                            <input type="time" class="config-input" id="silent-end" value="08:00">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- configurações de notificações -->
+        <!-- configurações de privacidade -->
+        <section class="tab-content" id="privacy-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-lock"></i>
+                    Configurações de Privacidade
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Controle de Dados</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Coleta de Dados</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="data-collection">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Permite coleta de dados para melhorar o serviço</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Analytics</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="analytics">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Ajuda a entender como você usa o aplicativo</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Personalização de Anúncios</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="personalized-ads">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Localização</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Compartilhar Localização</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="share-location">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Histórico de Localização</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="location-history">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Localização em Tempo Real</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="realtime-location">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Gerenciamento de Dados</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Baixar Meus Dados</span>
+                            <button class="btn-secondary" id="download-data-btn">
+                                <i class="fas fa-download"></i>
+                                Baixar Dados
+                            </button>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Limpar Cache</span>
+                            <button class="btn-secondary" id="clear-cache-btn">
+                                <i class="fas fa-broom"></i>
+                                Limpar Cache
+                            </button>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Excluir Conta</span>
+                            <button class="btn-danger" id="delete-account-btn">
+                                <i class="fas fa-trash"></i>
+                                Excluir Conta
+                            </button>
+                        </label>
+                        <p class="config-description">Esta ação não pode ser desfeita</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- configurações de privacidade -->
+        <!-- configurações de aparência -->
+        <section class="tab-content" id="appearance-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-palette"></i>
+                    Configurações de Aparência
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Tema</h3>
+                    <div class="theme-selector">
+                        <div class="theme-option" data-theme="light">
+                            <div class="theme-preview light">
+                                <div class="preview-header"></div>
+                                <div class="preview-content"></div>
+                            </div>
+                            <span>Claro</span>
+                        </div>
+                        <div class="theme-option" data-theme="dark">
+                            <div class="theme-preview dark">
+                                <div class="preview-header"></div>
+                                <div class="preview-content"></div>
+                            </div>
+                            <span>Escuro</span>
+                        </div>
+                        <div class="theme-option" data-theme="auto">
+                            <div class="theme-preview auto">
+                                <div class="preview-header"></div>
+                                <div class="preview-content"></div>
+                            </div>
+                            <span>Automático</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Cores</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Cor Principal</span>
+                            <input type="color" class="config-color" id="primary-color" value="#007bff">
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Cor Secundária</span>
+                            <input type="color" class="config-color" id="secondary-color" value="#6c757d">
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Cor de Destaque</span>
+                            <input type="color" class="config-color" id="accent-color" value="#28a745">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Interface</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Tamanho da Fonte</span>
+                            <select class="config-select" id="font-size">
+                                <option value="small">Pequeno</option>
+                                <option value="medium" selected>Médio</option>
+                                <option value="large">Grande</option>
+                                <option value="extra-large">Extra Grande</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Font Family</span>
+                            <select class="config-select" id="font-family">
+                                <option value="system">System Default</option>
+                                <option value="roboto">Roboto</option>
+                                <option value="open-sans">Open Sans</option>
+                                <option value="lato">Lato</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Animações</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="animations" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Modo Compacto</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="compact-mode">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- configurações de aparência -->
+        <!-- configurações avançadas -->
+        <section class="tab-content" id="advanced-tab">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-tools"></i>
+                    Configurações Avançadas
+                </h2>
+                
+                <div class="config-section">
+                    <h3>Desenvolvedor</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Modo Desenvolvedor</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="developer-mode">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Ativa recursos de desenvolvimento e depuração</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Console de Depuração</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="debug-console">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Logs Detalhados</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="verbose-logs">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Experimental</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Recursos Experimentais</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="experimental-features">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                        <p class="config-description">Ativa recursos em desenvolvimento</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Beta Program</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="beta-program">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Sistema</h3>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Limpar Todos os Dados</span>
+                            <button class="btn-danger" id="clear-all-data-btn">
+                                <i class="fas fa-trash"></i>
+                                Limpar Tudo
+                            </button>
+                        </label>
+                        <p class="config-description">Remove todos os dados do aplicativo</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Redefinir Configurações</span>
+                            <button class="btn-secondary" id="reset-settings-btn">
+                                <i class="fas fa-undo"></i>
+                                Redefinir
+                            </button>
+                        </label>
+                        <p class="config-description">Restaura as configurações padrão</p>
+                    </div>
+                    <div class="config-item">
+                        <label class="config-label">
+                            <span>Informações do Sistema</span>
+                            <button class="btn-secondary" id="system-info-btn">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Informações
+                            </button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- configurações avançadas -->
+        <!-- Salvar e Redefinir -->
+        <div class="config-actions">
+            <button class="btn-secondary" id="cancel-btn">
+                <i class="fas fa-times"></i>
+                Cancelar
+            </button>
+            <button class="btn-primary" id="save-btn">
+                <i class="fas fa-save"></i>
+                Salvar Alterações
+            </button>
+        </div>
+        <!-- Salvar e Redefinir -->
+    </div>
+
+    <script src="./js/Configurações.js"></script>
+</body>
+</html>

@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRILHANÇA - Relógios Inteligentes Compatíveis</title>
+    <link rel="shortcut icon" href="../favicoico/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #007bff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #333333;
+            --gradient-extreme: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            --gradient-smart: linear-gradient(135deg, #4ecdc4, #44a08d);
+            --gradient-value: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(30, 58, 114, 0.3);
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .header-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .categories {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-extreme);
+        }
+
+        .category.smart::before {
+            background: var(--gradient-smart);
+        }
+
+        .category.value::before {
+            background: var(--gradient-value);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .category.extreme .category-icon {
+            background: var(--gradient-extreme);
+        }
+
+        .category.smart .category-icon {
+            background: var(--gradient-smart);
+        }
+
+        .category.value .category-icon {
+            background: var(--gradient-value);
+        }
+
+        .category-title {
+            flex: 1;
+        }
+
+        .category-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .watches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .watch-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .watch-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .watch-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .watch-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: var(--card-bg);
+            padding: 0.5rem;
+        }
+
+        .watch-info {
+            flex: 1;
+        }
+
+        .watch-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .watch-brand {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .watch-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-tag {
+            background: rgba(0, 123, 255, 0.2);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+        }
+
+        .feature-tag.highlight {
+            background: rgba(40, 167, 69, 0.2);
+            color: var(--success-color);
+            border-color: rgba(40, 167, 69, 0.3);
+        }
+
+        .feature-tag.warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: var(--warning-color);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .watch-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .watch-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .spec-label {
+            color: var(--text-secondary);
+        }
+
+        .spec-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .watch-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .compatibility-meter {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .compatibility-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .compatibility-bar {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .compatibility-fill {
+            height: 100%;
+            transition: width 0.8s ease;
+            border-radius: 4px;
+        }
+
+        .compatibility-fill.excellent {
+            background: var(--success-color);
+            width: 95%;
+        }
+
+        .compatibility-fill.good {
+            background: var(--accent-color);
+            width: 80%;
+        }
+
+        .compatibility-fill.basic {
+            background: var(--warning-color);
+            width: 60%;
+        }
+
+        .comparison-table {
+            margin-top: 3rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .highlight-cell {
+            background: rgba(0, 123, 255, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .best-value {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .watches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .watch-specs {
+                grid-template-columns: 1fr;
+            }
+
+            .watch-actions {
+                flex-direction: column;
+            }
+
+            .categories {
+                gap: 1rem;
+            }
+
+            .category {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="header-title">🚶 TRILHANÇA</h1>
+            <p class="header-subtitle">Relógios Inteligentes Compatíveis</p>
+            <p class="header-description">
+                O relógio TRILHANÇA não é apenas um acessório - é um nó de dados essencial e seu guia offline em qualquer aventura. 
+                Quando você desce do veículo para fazer uma trilha, o relógio assume o papel de monitor de segurança e 
+                sistema de navegação independente, funcionando onde a internet não chega.
+            </p>
+        </header>
+
+        <div class="categories">
+            <!-- Categoria 1: Exploração Extrema -->
+            <div class="category extreme">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2 class="category-name">Exploração Extrema</h2>
+                        <p class="category-description">Integração Total - Funcionam onde a internet não chega</p>
+                    </div>
+                </div>
+
+                <div class="watches-grid">
+                    <!-- Garmin Fenix 8 -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/1e3c72/ffffff?text=GF8" alt="Garmin Fenix 8" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Garmin Fenix 8</h3>
+                                <p class="watch-brand">Garmin</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Mapas Topográficos Offline</span>
+                            <span class="feature-tag">GPS Multi-banda</span>
+                            <span class="feature-tag">Bateria 16 dias</span>
+                            <span class="feature-tag">Resistência Militar</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            O rei dos mapas offline. Construído para as expedições mais extremas, com navegação precisa 
+                            mesmo nas florestas mais densas e autonomia de semanas sem recarga.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia GPS:</span>
+                                <span class="spec-value">80 horas</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Memória Mapas:</span>
+                                <span class="spec-value">32 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Resistência:</span>
+                                <span class="spec-value">10 ATM</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Conectividade:</span>
+                                <span class="spec-value">Mesh + Bluetooth</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill excellent"></div>
+                            </div>
+                            <small style="color: var(--success-color);">Excelente - Integração Total</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('garmin-fenix8')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('garmin-fenix8')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Garmin Instinct 3 Solar -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/28a745/ffffff?text=IS3" alt="Garmin Instinct 3 Solar" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Instinct 3 Solar</h3>
+                                <p class="watch-brand">Garmin</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Carregamento Solar</span>
+                            <span class="feature-tag highlight">Bateria Infinita</span>
+                            <span class="feature-tag">Indestrutível</span>
+                            <span class="feature-tag">GPS Ultra Preciso</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            Bateria virtualmente infinita com carregamento solar. Construído para sobreviver a qualquer condição, 
+                            com autonomia ilimitada sob luz solar e resistência extrema.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia Total:</span>
+                                <span class="spec-value">Ilimitada com sol</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia Sombra:</span>
+                                <span class="spec-value">28 dias</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Painel Solar:</span>
+                                <span class="spec-value">100% da superfície</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">Modo Transamazônico</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill excellent"></div>
+                            </div>
+                            <small style="color: var(--success-color);">Excelente - Ideal para Amazônia</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('garmin-instinct3')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('garmin-instinct3')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Suunto Vertical 2 -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/007bff/ffffff?text=SV2" alt="Suunto Vertical 2" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Suunto Vertical 2</h3>
+                                <p class="watch-brand">Suunto</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Mapas Offline Gratuitos</span>
+                            <span class="feature-tag">GPS Dupla Banda</span>
+                            <span class="feature-tag">Precisão Extrema</span>
+                            <span class="feature-tag">Sensores Avançados</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            Os melhores mapas offline gratuitos do mercado com antena GPS de banda dupla ultraprecisa. 
+                            Ideal para "Modo Transamazônico" com alertas de altitude e previsão de tempestades.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia GPS:</span>
+                                <span class="spec-value">60h a 250h</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Mapas Offline:</span>
+                                <span class="spec-value">Gratuitos e Ilimitados</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">GPS:</span>
+                                <span class="spec-value">Dupla Banda + GLONASS</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">Alertas Atmosféricos</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill excellent"></div>
+                            </div>
+                            <small style="color: var(--success-color);">Excelente - Melhor GPS do Mercado</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('suunto-vertical2')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('suunto-vertical2')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coros Vertix 2S -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/667eea/ffffff?text=V2S" alt="Coros Vertix 2S" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Vertix 2S</h3>
+                                <p class="watch-brand">Coros</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Memória Gigantesca</span>
+                            <span class="feature-tag">Bateria 40 dias</span>
+                            <span class="feature-tag">Mapas Offline</span>
+                            <span class="feature-tag">Touchscreen Completo</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            Memória interna gigantesca para mapas e bateria que dura até 40 dias. 
+                            Excelente para expedições de longa duração onde não haverá carga elétrica por semanas.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Memória Interna:</span>
+                                <span class="spec-value">32 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia Máxima:</span>
+                                <span class="spec-value">40 dias</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Tela:</span>
+                                <span class="spec-value">Touch AMOLED 1.4"</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">Expedição Longa</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill excellent"></div>
+                            </div>
+                            <small style="color: var(--success-color);">Excelente - Expedições Longas</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('coros-vertix2s')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('coros-vertix2s')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria 2: Tecnologia e Segurança -->
+            <div class="category smart">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2 class="category-name">Tecnologia e Segurança</h2>
+                        <p class="category-description">Smart - Foco em comunicação e interface fluida</p>
+                    </div>
+                </div>
+
+                <div class="watches-grid">
+                    <!-- Apple Watch Ultra 3 -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/000000/ffffff?text=AWU3" alt="Apple Watch Ultra 3" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Apple Watch Ultra 3</h3>
+                                <p class="watch-brand">Apple</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Botão de Ação Customizável</span>
+                            <span class="feature-tag">Sirene 86dB</span>
+                            <span class="feature-tag">SOS Nativo</span>
+                            <span class="feature-tag">Integração Profunda</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            Botão de ação personalizável para ativar o SOS do TRILHANÇA ou PTT. 
+                            Sirene de emergência de 86 decibéis e espelhamento perfeito das notificações do comboio.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia GPS:</span>
+                                <span class="spec-value">12h a 36h</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Sirene:</span>
+                                <span class="spec-value">86 decibéis</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Botão Ação:</span>
+                                <span class="spec-value">Customizável</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">SOS + PTT Integrados</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill good"></div>
+                            </div>
+                            <small style="color: var(--accent-color);">Boa - Melhor Interface</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('apple-ultra3')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('apple-ultra3')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Samsung Galaxy Watch Ultra -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/1428a6/ffffff?text=GWU" alt="Samsung Galaxy Watch Ultra" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Galaxy Watch Ultra</h3>
+                                <p class="watch-brand">Samsung</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Resistência Militar</span>
+                            <span class="feature-tag">Sensores de Saúde</span>
+                            <span class="feature-tag">Monitor de Fadiga</span>
+                            <span class="feature-tag">Integração Android</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            Resistência de nível militar e integração profunda com sensores de saúde. 
+                            Monitoramento avançado de fadiga do motorista ou trilheiro (frequência cardíaca/estresse).
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia GPS:</span>
+                                <span class="spec-value">48 horas</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Resistência:</span>
+                                <span class="spec-value">MIL-STD-810H</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Sensores:</span>
+                                <span class="spec-value">BioActive avançados</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">Monitor de Fadiga</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill good"></div>
+                            </div>
+                            <small style="color: var(--accent-color);">Boa - Mais Seguro</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('samsung-ultra')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('samsung-ultra')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria 3: Custo-Benefício Off-Road -->
+            <div class="category value">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="category-title">
+                        <h2 class="category-name">Custo-Benefício Off-Road</h2>
+                        <p class="category-description">Democratizar o uso do app em grupos maiores</p>
+                    </div>
+                </div>
+
+                <div class="watches-grid">
+                    <!-- Amazfit T-Rex 3 Pro -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/764ba2/ffffff?text=TR3" alt="Amazfit T-Rex 3 Pro" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">T-Rex 3 Pro</h3>
+                                <p class="watch-brand">Amazfit</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag highlight">Melhor Custo-Benefício</span>
+                            <span class="feature-tag">Mapas Offline</span>
+                            <span class="feature-tag">GPS Alta Precisão</span>
+                            <span class="feature-tag warning">Preço Acessível</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            O melhor custo-benefício para trilha. Tem mapas offline, GPS de alta precisão 
+                            e custa uma fração de um Garmin. Ideal para grupos maiores.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia GPS:</span>
+                                <span class="spec-value">80 horas</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Mapas Offline:</span>
+                                <span class="spec-value">Sim (Básico)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">GPS:</span>
+                                <span class="spec-value">Dual-band + Galileo</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">Alertas Crowdsourcing</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill good"></div>
+                            </div>
+                            <small style="color: var(--accent-color);">Boa - Robustez e Preço</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('amazfit-trex3')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('amazfit-trex3')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Xiaomi Redmi Watch 5 Lite -->
+                    <div class="watch-card">
+                        <div class="watch-header">
+                            <img src="https://via.placeholder.com/80x80/ff6900/ffffff?text=RM5L" alt="Xiaomi Redmi Watch 5 Lite" class="watch-image">
+                            <div class="watch-info">
+                                <h3 class="watch-name">Redmi Watch 5 Lite</h3>
+                                <p class="watch-brand">Xiaomi</p>
+                            </div>
+                        </div>
+                        
+                        <div class="watch-features">
+                            <span class="feature-tag">Simples e Barato</span>
+                            <span class="feature-tag">GPS Integrado</span>
+                            <span class="feature-tag warning">Básico</span>
+                            <span class="feature-tag">Monitor Básico</span>
+                        </div>
+                        
+                        <p class="watch-description">
+                            Simples, barato e com GPS integrado. Monitor básico de localização 
+                            para membros do comboio que não precisam de mapas complexos no pulso.
+                        </p>
+                        
+                        <div class="watch-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Autonomia GPS:</span>
+                                <span class="spec-value">24 horas</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Funções:</span>
+                                <span class="spec-value">Básicas</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">GPS:</span>
+                                <span class="spec-value">GPS + GLONASS</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Função TRILHANÇA:</span>
+                                <span class="spec-value">Monitor Localização</span>
+                            </div>
+                        </div>
+                        
+                        <div class="compatibility-meter">
+                            <div class="compatibility-label">Compatibilidade TRILHANÇA</div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill basic"></div>
+                            </div>
+                            <small style="color: var(--warning-color);">Básico - Para Membros do Grupo</small>
+                        </div>
+                        
+                        <div class="watch-actions">
+                            <button class="btn btn-primary" onclick="showWatchDetails('xiaomi-redmi5')">
+                                <i class="fas fa-info-circle"></i>
+                                Ver Detalhes
+                            </button>
+                            <button class="btn btn-secondary" onclick="showCompatibility('xiaomi-redmi5')">
+                                <i class="fas fa-link"></i>
+                                Como Conectar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela Comparativa -->
+        <div class="comparison-table">
+            <h2 class="table-title">📊 Comparativo para o Usuário TRILHANÇA</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Destaque para Trilha</th>
+                        <th>Autonomia (GPS)</th>
+                        <th>Mapas Offline</th>
+                        <th>Preço Aprox.</th>
+                        <th>Recomendação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Garmin Instinct 3 Solar</strong></td>
+                        <td class="highlight-cell">Autonomia Ilimitada</td>
+                        <td class="best-value">Ilimitada ☀️</td>
+                        <td class="best-value">Sim (Topográficos)</td>
+                        <td>R$ 4.500</td>
+                        <td class="highlight-cell">Ideal para Amazônia</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Suunto Vertical 2</strong></td>
+                        <td class="highlight-cell">Precisão de Mapas</td>
+                        <td class="best-value">60h a 250h</td>
+                        <td class="best-value">Sim (Gratuitos)</td>
+                        <td>R$ 3.800</td>
+                        <td class="highlight-cell">Melhor GPS do Mercado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Garmin Fenix 8</strong></td>
+                        <td class="highlight-cell">Breadcrumb</td>
+                        <td class="best-value">80 horas</td>
+                        <td class="best-value">Sim (Topográficos)</td>
+                        <td>R$ 6.200</td>
+                        <td>Expedições Técnicas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coros Vertix 2S</strong></td>
+                        <td class="highlight-cell">Memória Gigantesca</td>
+                        <td>40 dias</td>
+                        <td>Sim (32GB)</td>
+                        <td>R$ 2.900</td>
+                        <td>Expedições Longas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apple Watch Ultra 3</strong></td>
+                        <td class="highlight-cell">Interface Fluida</td>
+                        <td>12h a 36h</td>
+                        <td>Sim (via App)</td>
+                        <td>R$ 8.500</td>
+                        <td>Melhor Experiência</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Samsung Galaxy Ultra</strong></td>
+                        <td class="highlight-cell">Segurança Avançada</td>
+                        <td>48 horas</td>
+                        <td>Sim (via App)</td>
+                        <td>R$ 4.200</td>
+                        <td>Mais Seguro</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amazfit T-Rex 3 Pro</strong></td>
+                        <td class="highlight-cell">Custo-Benefício</td>
+                        <td class="best-value">80 horas</td>
+                        <td>Sim (Básico)</td>
+                        <td class="best-value">R$ 800</td>
+                        <td class="highlight-cell">Melhor para Grupos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xiaomi Redmi 5 Lite</strong></td>
+                        <td class="highlight-cell">Acessibilidade</td>
+                        <td>24 horas</td>
+                        <td>Não</td>
+                        <td class="best-value">R$ 400</td>
+                        <td>Para Membros</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 TRILHANÇA - Relógios Inteligentes para Aventuras Extremas</p>
+            <div class="footer-links">
+                <a href="../mapa.html" class="footer-link">
+                    <i class="fas fa-map"></i>
+                    Mapa Principal
+                </a>
+                <a href="./watch.html" class="footer-link">
+                    <i class="fas fa-clock"></i>
+                    Interface do Relógio
+                </a>
+                <a href="../Politicas/politica-privacidade.html" class="footer-link">
+                    <i class="fas fa-shield-alt"></i>
+                    Política de Privacidade
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showWatchDetails(watchId) {
+            // Simular navegação para detalhes do relógio
+            console.log(`Mostrando detalhes do relógio: ${watchId}`);
+            
+            // Criar modal de detalhes (simplificado)
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--card-bg);
+                border: 2px solid var(--accent-color);
+                border-radius: 20px;
+                padding: 2rem;
+                max-width: 500px;
+                z-index: 10000;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            `;
+            
+            modal.innerHTML = `
+                <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Detalhes do Relógio</h2>
+                <p style="color: var(--text-secondary); line-height: 1.6;">
+                    Para conectar seu relógio ao ecossistema TRILHANÇA:
+                </p>
+                <ol style="color: var(--text-secondary); line-height: 1.8; margin-left: 1.5rem;">
+                    <li>Instale o app TRILHANÇA no seu smartphone</li>
+                    <li>Abra as configurações do relógio e ative o Bluetooth</li>
+                    <li>No app, vá em "Conectar Relógio" e selecione seu modelo</li>
+                    <li>Siga as instruções de pareamento específicas para seu modelo</li>
+                    <li>Pronto! Seu relógio agora é um nó de dados TRILHANÇA</li>
+                </ol>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: var(--accent-color);
+                        color: white;
+                        border: none;
+                        padding: 0.8rem 2rem;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    ">Entendido</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function showCompatibility(watchId) {
+            // Simular redirecionamento para guia de compatibilidade
+            console.log(`Mostrando compatibilidade para: ${watchId}`);
+            
+            showWatchDetails(watchId); // Reutilizar a função de detalhes
+        }
+
+        // Adicionar animações de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.watch-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Simular atualização de preços (inflação)
+        function updatePrices() {
+            console.log('Preços atualizados conforme mercado atual');
+        }
+
+        // Adicionar filtros interativos
+        function filterByCategory(category) {
+            const allCards = document.querySelectorAll('.watch-card');
+            const categoryCards = document.querySelectorAll(`.category.${category} .watch-card`);
+            
+            allCards.forEach(card => {
+                card.style.display = 'none';
+            });
+            
+            categoryCards.forEach(card => {
+                card.style.display = 'block';
+            });
+        }
+
+        // Adicionar comparação lado a lado
+        function compareWatches(watch1, watch2) {
+            console.log(`Comparando ${watch1} com ${watch2}`);
+            // Implementar lógica de comparação
+        }
+    </script>
+</body>
+</html>

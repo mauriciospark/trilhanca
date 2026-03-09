@@ -1,0 +1,23 @@
+name: super_app_expedicao
+description: Super App Expedição - MVP scaffold
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  url_launcher: ^6.1.7
+  image_picker: ^1.0.7
+  shared_preferences: ^2.2.2
+  # maplibre_gl: ^0.14.0  # descomentar após configurar nativo
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

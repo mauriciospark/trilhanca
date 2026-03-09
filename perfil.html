@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil • TRILHANÇA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="perfil.js"></script>
+  <script src="perfil-sync.js"></script>
+  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <!-- Header Modernizado -->
+    <header class="modern-header">
+      <div class="header-brand">
+        <img src="./Trilhança.png" alt="TRILHANÇA" class="logo">
+        <h1>TRILHANÇA</h1>
+      </div>
+      <nav class="nav">
+        <a class="btn" href="./cadastro_grupo.html">
+          <i class="fas fa-users"></i>
+          Editar Grupo
+        </a>
+        <a class="btn" href="Comunicações.html">
+          <i class="fas fa-radio"></i>
+          Comunicações
+        </a>
+        <a class="btn" href="./mapa.html">
+          <i class="fas fa-map"></i>
+          Mapa
+        </a>
+        <a class="btn" href="./paineldecontrole.html">
+          <i class="fas fa-users"></i>
+          Painel de Controle
+        </a>
+        <a class="btn" href="./scrum_dashboard.html">
+          <i class="fas fa-chart-line"></i>
+          Scrum Dashboard
+        </a>
+        <a class="btn active" href="./perfil.html">
+          <i class="fas fa-user"></i>
+          Perfil
+        </a>
+        <a class="btn" href="./Configurações.html">
+          <i class="fas fa-cog"></i>
+          Configurações
+        </a>
+      </nav>
+    </header>
+
+    <!-- Status Card -->
+    <section class="status-card">
+      <div class="status-header">
+        <h2><i class="fas fa-satellite-dish"></i> Status em Tempo Real</h2>
+        <div class="status-indicators">
+          <span class="status-dot online" title="Online"></span>
+          <span class="status-dot mesh" title="Mesh Ativo"></span>
+          <span class="status-dot gps" title="GPS Conectado"></span>
+        </div>
+      </div>
+      <div class="status-grid">
+        <div class="status-item">
+          <i class="fas fa-location-arrow"></i>
+          <div class="status-info">
+            <span class="status-label">Posição</span>
+            <span class="status-value" id="current-position">—</span>
+          </div>
+        </div>
+        <div class="status-item">
+          <i class="fas fa-tachometer-alt"></i>
+          <div class="status-info">
+            <span class="status-label">Velocidade</span>
+            <span class="status-value" id="current-speed">—</span>
+          </div>
+        </div>
+        <div class="status-item">
+          <i class="fas fa-route"></i>
+          <div class="status-info">
+            <span class="status-label">Distância Hoje</span>
+            <span class="status-value" id="today-distance">—</span>
+          </div>
+        </div>
+        <div class="status-item">
+          <i class="fas fa-clock"></i>
+          <div class="status-info">
+            <span class="status-label">Tempo Ativo</span>
+            <span class="status-value" id="active-time">—</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfil Principal com Relógio Integrado -->
+    <section class="main-profile">
+      <div class="profile-header">
+        <div class="profile-avatar-section">
+          <div class="profile-avatar" data-profile-field="fotoPerfil" id="perfil-foto" style="background-image: url('/icon/Usuario.png');">
+            <div class="avatar-overlay">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          <div class="avatar-actions">
+            <button class="avatar-btn" id="change-photo">
+              <i class="fas fa-camera"></i>
+            </button>
+            <button class="avatar-btn" id="sync-watch">
+              <i class="fas fa-sync"></i>
+            </button>
+            <button class="avatar-btn" id="sync-config" title="Sincronizar com Configurações">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+        </div>
+        <div class="profile-info">
+          <h2 data-profile-field="nome" id="perfil-nome">—</h2>
+          <div class="profile-badges">
+            <span class="badge" id="mode-badge">
+              <i class="fas fa-walking"></i>
+              A Pé
+            </span>
+            <span class="badge" id="role-badge">
+              <i class="fas fa-user-shield"></i>
+              Líder
+            </span>
+            <span class="badge" id="status-badge">
+              <i class="fas fa-circle"></i>
+              Ativo
+            </span>
+          </div>
+          <div class="profile-contact">
+            <span class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span data-profile-field="telefone" id="perfil-telefone">—</span>
+            </span>
+            <span class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span data-profile-field="email" id="perfil-email">—</span>
+            </span>
+          </div>
+          <div class="profile-bio">
+            <p data-profile-field="biografia" id="perfil-biografia">—</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Painel do Relógio Inteligente -->
+      <div class="watch-panel">
+        <h3><i class="fas fa-clock"></i> Relógio Inteligente TRILHANÇA</h3>
+        <div class="watch-display">
+          <div class="watch-stats">
+            <div class="watch-stat">
+              <div class="stat-icon">
+                <i class="fas fa-battery-three-quarters"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Bateria</span>
+                <span class="stat-value" id="watch-battery">75%</span>
+              </div>
+            </div>
+            <div class="watch-stat">
+              <div class="stat-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Frequência</span>
+                <span class="stat-value" id="watch-heart">72 bpm</span>
+              </div>
+            </div>
+            <div class="watch-stat">
+              <div class="stat-icon">
+                <i class="fas fa-shoe-prints"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Passos</span>
+                <span class="stat-value" id="watch-steps">8,432</span>
+              </div>
+            </div>
+            <div class="watch-stat">
+              <div class="stat-icon">
+                <i class="fas fa-mountain"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Altitude</span>
+                <span class="stat-value" id="watch-altitude">847m</span>
+              </div>
+            </div>
+          </div>
+          <div class="watch-actions">
+            <button class="watch-btn" id="watch-ptt">
+              <i class="fas fa-microphone"></i>
+              PTT
+            </button>
+            <button class="watch-btn" id="watch-light">
+              <i class="fas fa-lightbulb"></i>
+              Lanterna
+            </button>
+            <button class="watch-btn watch-btn-sos" id="watch-sos">
+              <i class="fas fa-exclamation-triangle"></i>
+              SOS
+            </button>
+            <button class="watch-btn" id="watch-sync">
+              <i class="fas fa-sync"></i>
+              Sincronizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Informações Detalhadas -->
+    <section class="info-section">
+      <div class="info-grid">
+        <!-- Veículo e Mobilidade -->
+        <div class="info-card">
+          <h3><i class="fas fa-car"></i> Veículo e Mobilidade</h3>
+          <div class="info-content">
+            <div class="info-row">
+              <span class="info-label">Modo Atual:</span>
+              <span class="info-value" id="current-mode">🚶 A Pé</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Veículo Principal:</span>
+              <span class="info-value" id="perfil-veiculo">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Placa:</span>
+              <span class="info-value" id="perfil-placa">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Odômetro:</span>
+              <span class="info-value" id="perfil-odometro">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Viagem Atual:</span>
+              <span class="info-value" id="perfil-viagem-km">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Autonomia:</span>
+              <span class="info-value" id="perfil-autonomia">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Consumo:</span>
+              <span class="info-value" id="perfil-consumo">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saúde e Segurança -->
+        <div class="info-card">
+          <h3><i class="fas fa-heart"></i> Saúde e Segurança</h3>
+          <div class="info-content">
+            <div class="info-row">
+              <span class="info-label">Tipo Sanguíneo:</span>
+              <span class="info-value" id="perfil-sangue">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Alergias:</span>
+              <span class="info-value" id="perfil-alergias">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Emergência:</span>
+              <span class="info-value" id="perfil-emergencia">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Papel no Grupo:</span>
+              <span class="info-value" id="perfil-papel">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Experiência:</span>
+              <span class="info-value" id="perfil-experiencia">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Último Check-in:</span>
+              <span class="info-value" id="perfil-checkin">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comunicação e Equipamentos -->
+        <div class="info-card">
+          <h3><i class="fas fa-satellite"></i> Comunicação e Equipamentos</h3>
+          <div class="info-content">
+            <div class="info-row">
+              <span class="info-label">Comunicação:</span>
+              <span class="info-value" id="perfil-comunicacao">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Mapas Offline:</span>
+              <span class="info-value" id="perfil-mapaso">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Equipamento Resgate:</span>
+              <span class="info-value" id="perfil-resgate">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Relógio Modelo:</span>
+              <span class="info-value" id="watch-model">Garmin Instinct 3</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Conectividade:</span>
+              <span class="info-value" id="watch-connectivity">Bluetooth + Mesh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grupo de Viagem -->
+    <section class="group-section">
+      <div class="group-header">
+        <h2><i class="fas fa-users"></i> Grupo de Viagem</h2>
+        <div class="group-stats">
+          <span class="group-stat">
+            <i class="fas fa-user-friends"></i>
+            <span id="member-count">5</span>
+          </span>
+          <span class="group-stat">
+            <i class="fas fa-route"></i>
+            <span id="route-distance">234 km</span>
+          </span>
+        </div>
+      </div>
+      
+      <div class="group-content">
+        <div class="group-info">
+          <div class="group-cover-section">
+            <div id="grupo-foto" class="group-cover"></div>
+            <div class="group-status">
+              <span class="status-badge active">Em Viagem</span>
+            </div>
+          </div>
+          <div class="group-details">
+            <h3 id="grupo-nome">—</h3>
+            <div class="group-route">
+              <i class="fas fa-map-marker-alt"></i>
+              <span id="grupo-rota">—</span>
+            </div>
+            <div class="group-dates">
+              <i class="fas fa-calendar"></i>
+              <span id="grupo-datas">—</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group-specs">
+          <div class="spec-item">
+            <i class="fas fa-car-side"></i>
+            <span class="spec-label">Veículos Aceitos:</span>
+            <span id="grupo-veiculo">—</span>
+          </div>
+          <div class="spec-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="spec-label">Ritmo:</span>
+            <span id="grupo-ritmo">—</span>
+          </div>
+          <div class="spec-item">
+            <i class="fas fa-users-cog"></i>
+            <span class="spec-label">Limite Veículos:</span>
+            <span id="grupo-limite">—</span>
+          </div>
+          <div class="spec-item">
+            <i class="fas fa-car"></i>
+            <span class="spec-label">Vagas Carona:</span>
+            <span id="grupo-carona">—</span>
+          </div>
+          <div class="spec-item">
+            <i class="fas fa-map-pin"></i>
+            <span class="spec-label">Ponto Encontro:</span>
+            <span id="grupo-encontro">—</span>
+          </div>
+          <div class="spec-item">
+            <i class="fas fa-clipboard-check"></i>
+            <span class="spec-label">Requisitos:</span>
+            <span id="grupo-requisitos">—</span>
+          </div>
+        </div>
+        
+        <div class="group-description">
+          <h4>Descrição</h4>
+          <p id="grupo-descricao">—</p>
+        </div>
+        
+        <div class="members-section">
+          <h4><i class="fas fa-users"></i> Membros do Grupo</h4>
+          <div id="membros" class="members-grid"></div>
+        </div>
+      </div>
+      
+      <div class="group-actions">
+        <a class="btn" href="./cadastro_grupo.html">
+          <i class="fas fa-edit"></i>
+          Atualizar Grupo
+        </a>
+        <button class="btn" id="copy-link">
+          <i class="fas fa-link"></i>
+          Copiar Link
+        </button>
+        <button class="btn" id="share-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+          WhatsApp
+        </button>
+        <button class="btn" id="share-sms">
+          <i class="fas fa-sms"></i>
+          SMS
+        </button>
+      </div>
+    </section>
+
+    <!-- Ações Rápidas -->
+    <section class="quick-actions">
+      <h3><i class="fas fa-bolt"></i> Ações Rápidas</h3>
+      <div class="actions-grid">
+        <button class="action-btn" id="check-in-btn">
+          <i class="fas fa-map-marker-alt"></i>
+          Check-in
+        </button>
+        <button class="action-btn" id="emergency-btn">
+          <i class="fas fa-exclamation-circle"></i>
+          Emergência
+        </button>
+        <button class="action-btn" id="share-location-btn">
+          <i class="fas fa-share-alt"></i>
+          Compartilhar Local
+        </button>
+        <button class="action-btn" id="sync-data-btn">
+          <i class="fas fa-cloud-upload-alt"></i>
+          Sincronizar Dados
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script src="perfil.js"></script>
+</body>
+</html>

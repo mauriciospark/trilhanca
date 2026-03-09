@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Perfil • Trilhança</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #2a2a2a;
+      --accent-color: #ff8a34;
+      --success-color: #28a745;
+      --warning-color: #ffc107;
+      --danger-color: #dc3545;
+      --dark-bg: #0f0f0f;
+      --card-bg: #1a1a1a;
+      --border-color: #333;
+      --text-primary: #ffffff;
+      --text-secondary: #cfcfcf;
+      --text-muted: #999;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a1a 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 2px solid var(--border-color);
+    }
+
+    .brand h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      main {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title i {
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--secondary-color);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      background: var(--secondary-color);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+
+    .avatar-section {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .avatar-upload {
+      flex: 1;
+    }
+
+    .avatar-preview {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--border-color);
+      background: var(--secondary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .marker-preview {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      border: 2px solid var(--border-color);
+      background: var(--secondary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .marker-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-color);
+    }
+
+    .marker-pin {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 20px solid var(--primary-color);
+    }
+
+    .color-inputs {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .color-input {
+      width: 50px;
+      height: 40px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-color);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #333;
+      border-color: var(--primary-color);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .summary {
+      background: linear-gradient(135deg, var(--success-color) 0%, #1e7e34 100%);
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 24px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 12px;
+      }
+      
+      main {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-row,
+      .form-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="./favicoico/android-chrome-192x192.png" alt="Trilhança">
+        <h1>Trilhança</h1>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2 class="card-title">
+          <i class="fas fa-user"></i>
+          Foto de Perfil
+        </h2>
+        
+        <div class="avatar-section">
+          <div class="avatar-upload">
+            <div class="form-group">
+              <label for="perfil-foto">Foto do Perfil</label>
+              <input type="file" id="perfil-foto" accept="image/*">
+            </div>
+          </div>
+          
+          <div class="avatar-preview" id="perfil-preview">
+            <i class="fas fa-user" style="font-size: 3rem; color: var(--text-muted);"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Aparência no Mapa</label>
+          <div class="color-inputs">
+            <div>
+              <label for="marker-color" style="font-size: 0.9rem;">Cor do Marcador</label>
+              <input type="color" id="marker-color" value="#007bff" class="color-input">
+            </div>
+            <div>
+              <label for="route-color" style="font-size: 0.9rem;">Cor da Rota</label>
+              <input type="color" id="route-color" value="#ff8a34" class="color-input">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="marker-style">Estilo do Marcador</label>
+          <select id="marker-style">
+            <option value="avatar-circle">Foto (círculo)</option>
+            <option value="avatar-square">Foto (quadrado)</option>
+            <option value="dot">Ponto colorido</option>
+            <option value="pin">Pin</option>
+          </select>
+        </div>
+
+        <div class="marker-preview" id="marker-preview">
+          <div class="marker-dot"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">
+          <i class="fas fa-id-card"></i>
+          Dados Pessoais
+        </h2>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" placeholder="Seu nome completo">
+          </div>
+          
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" placeholder="(XX) 99999-9999">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu.email@exemplo.com">
+        </div>
+
+        <div class="form-group">
+          <label for="nascimento">Data de Nascimento</label>
+          <input type="date" id="nascimento">
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">
+          <i class="fas fa-car"></i>
+          Veículo
+        </h2>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="veiculo-tipo">Tipo de Veículo</label>
+            <select id="veiculo-tipo">
+              <option value="">Selecione</option>
+              <option value="4x2">4x2</option>
+              <option value="4x4">4x4</option>
+              <option value="moto">Moto</option>
+              <option value="caminhao">Caminhão</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="veiculo-placa">Placa</label>
+            <input type="text" id="veiculo-placa" placeholder="AAA0A00">
+          </div>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="odometro">Odômetro Atual (km)</label>
+            <input type="number" id="odometro" min="0" step="0.1" placeholder="123456">
+          </div>
+          
+          <div class="form-group">
+            <label for="autonomia">Autonomia (km)</label>
+            <input type="number" id="autonomia" min="0" step="0.1" placeholder="450">
+          </div>
+          
+          <div class="form-group">
+            <label for="consumo">Consumo (L/100km)</label>
+            <input type="number" id="consumo" min="0" step="0.1" placeholder="12.5">
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">
+          <i class="fas fa-heartbeat"></i>
+          Saúde e Segurança
+        </h2>
+        
+        <div class="form-group">
+          <label for="sangue">Tipo Sanguíneo</label>
+          <select id="sangue">
+            <option value="">Selecione</option>
+            <option value="O-">O-</option>
+            <option value="O+">O+</option>
+            <option value="A-">A-</option>
+            <option value="A+">A+</option>
+            <option value="B-">B-</option>
+            <option value="B+">B+</option>
+            <option value="AB-">AB-</option>
+            <option value="AB+">AB+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="alergias">Alergias e Condições Médicas</label>
+          <textarea id="alergias" placeholder="Descreva alergias, medicamentos ou condições médicas importantes"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="emergencia-nome">Contato de Emergência</label>
+            <input type="text" id="emergencia-nome" placeholder="Nome do contato">
+          </div>
+          
+          <div class="form-group">
+            <label for="emergencia-telefone">Telefone de Emergência</label>
+            <input type="tel" id="emergencia-telefone" placeholder="(XX) 99999-9999">
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">
+          <i class="fas fa-users"></i>
+          Grupo e Experiência
+        </h2>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="papel">Papel no Grupo</label>
+            <select id="papel">
+              <option value="">Selecione</option>
+              <option value="lider">Líder</option>
+              <option value="mecanico">Mecânico</option>
+              <option value="socorrista">Socorrista</option>
+              <option value="piloto">Piloto</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="experiencia">Experiência Off-road</label>
+            <select id="experiencia">
+              <option value="">Selecione</option>
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mapas-offline">Mapas Offline</label>
+          <select id="mapas-offline">
+            <option value="nenhum">Nenhum</option>
+            <option value="parcial">Parcial</option>
+            <option value="completo">Completo</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title">
+          <i class="fas fa-tools"></i>
+          Equipamentos
+        </h2>
+        
+        <div class="form-group">
+          <label>Equipamentos de Resgate</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="resgate-guincho">
+              <label for="resgate-guincho">Guincho</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="resgate-camburao">
+              <label for="resgate-camburao">Camburão</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="resgate-ferramentas">
+              <label for="resgate-ferramentas">Ferramentas</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Equipamentos de Comunicação</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="com-px">
+              <label for="com-px">Rádio PX</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="com-starlink">
+              <label for="com-starlink">Starlink</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="com-sat">
+              <label for="com-sat">Satélite</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary" id="sync-bluetooth">
+          <i class="fas fa-bluetooth"></i>
+          Sincronizar Bluetooth
+        </button>
+        <button type="button" class="btn btn-secondary" id="sync-serial">
+          <i class="fas fa-usb"></i>
+          Conectar Serial
+        </button>
+        <button type="submit" class="btn btn-primary" id="save-profile">
+          <i class="fas fa-save"></i>
+          Salvar Perfil
+        </button>
+      </div>
+    </main>
+
+    <div class="summary hidden" id="summary">
+      <i class="fas fa-check-circle"></i>
+      Perfil salvo com sucesso!
+    </div>
+  </div>
+
+  <script>
+    // Variáveis globais
+    let profileData = null;
+
+    // Elementos do DOM
+    const elements = {
+      form: document.getElementById('profile-form'),
+      summary: document.getElementById('summary'),
+      perfilFoto: document.getElementById('perfil-foto'),
+      perfilPreview: document.getElementById('perfil-preview'),
+      markerColor: document.getElementById('marker-color'),
+      routeColor: document.getElementById('route-color'),
+      markerStyle: document.getElementById('marker-style'),
+      markerPreview: document.getElementById('marker-preview'),
+      nome: document.getElementById('nome'),
+      telefone: document.getElementById('telefone'),
+      email: document.getElementById('email'),
+      nascimento: document.getElementById('nascimento'),
+      veiculoTipo: document.getElementById('veiculo-tipo'),
+      veiculoPlaca: document.getElementById('veiculo-placa'),
+      odometro: document.getElementById('odometro'),
+      autonomia: document.getElementById('autonomia'),
+      consumo: document.getElementById('consumo'),
+      sangue: document.getElementById('sangue'),
+      alergias: document.getElementById('alergias'),
+      emergenciaNome: document.getElementById('emergencia-nome'),
+      emergenciaTelefone: document.getElementById('emergencia-telefone'),
+      papel: document.getElementById('papel'),
+      experiencia: document.getElementById('experiencia'),
+      mapasOffline: document.getElementById('mapas-offline'),
+      resgateGuincho: document.getElementById('resgate-guincho'),
+      resgateCamburao: document.getElementById('resgate-camburao'),
+      resgateFerramentas: document.getElementById('resgate-ferramentas'),
+      comPx: document.getElementById('com-px'),
+      comStarlink: document.getElementById('com-starlink'),
+      comSat: document.getElementById('com-sat'),
+      saveBtn: document.getElementById('save-profile'),
+      syncBluetoothBtn: document.getElementById('sync-bluetooth'),
+      syncSerialBtn: document.getElementById('sync-serial')
+    };
+
+    // Inicialização
+    function init() {
+      loadSavedProfile();
+      setupEventListeners();
+      updateMarkerPreview();
+    }
+
+    // Configurar event listeners
+    function setupEventListeners() {
+      // Preview de foto
+      elements.perfilFoto.addEventListener('change', handleImagePreview);
+      
+      // Mudanças de aparência
+      elements.markerColor.addEventListener('change', updateMarkerPreview);
+      elements.routeColor.addEventListener('change', updateMarkerPreview);
+      elements.markerStyle.addEventListener('change', updateMarkerPreview);
+      
+      // Form submit
+      elements.form.addEventListener('submit', handleSubmit);
+      
+      // Botões de sincronização
+      elements.syncBluetoothBtn.addEventListener('click', syncBluetooth);
+      elements.syncSerialBtn.addEventListener('click', syncSerial);
+    }
+
+    // Handle de preview de imagem
+    function handleImagePreview(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        elements.perfilPreview.style.backgroundImage = `url(${e.target.result})`;
+        elements.perfilPreview.innerHTML = '';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Atualizar preview do marcador
+    function updateMarkerPreview() {
+      const color = elements.markerColor.value;
+      const style = elements.markerStyle.value;
+      const photoUrl = elements.perfilPreview.style.backgroundImage;
+      
+      let html = '';
+      
+      if (style === 'dot') {
+        html = `<div class="marker-dot" style="background: ${color};"></div>`;
+      } else if (style === 'pin') {
+        html = `<div class="marker-pin" style="border-top-color: ${color};"></div>`;
+      } else {
+        // Avatar styles
+        const borderRadius = style === 'avatar-circle' ? '50%' : '8px';
+        html = photoUrl ? 
+          `<div style="width: 40px; height: 40px; border-radius: ${borderRadius}; background-size: cover; background-position: center; background-image: ${photoUrl};"></div>` :
+          `<i class="fas fa-user" style="font-size: 2rem; color: ${color};"></i>`;
+      }
+      
+      elements.markerPreview.innerHTML = html;
+    }
+
+    // Carregar perfil salvo
+    function loadSavedProfile() {
+      try {
+        const saved = localStorage.getItem('trilhanca_perfil');
+        if (!saved) return;
+        
+        profileData = JSON.parse(saved);
+        populateForm(profileData);
+      } catch (error) {
+        console.error('Erro ao carregar perfil:', error);
+      }
+    }
+
+    // Preencher formulário
+    function populateForm(data) {
+      if (data.nome) elements.nome.value = data.nome;
+      if (data.telefone) elements.telefone.value = data.telefone;
+      if (data.email) elements.email.value = data.email;
+      if (data.nascimento) elements.nascimento.value = data.nascimento;
+      if (data.veiculoTipo) elements.veiculoTipo.value = data.veiculoTipo;
+      if (data.veiculoPlaca) elements.veiculoPlaca.value = data.veiculoPlaca;
+      if (data.odometro) elements.odometro.value = data.odometro;
+      if (data.autonomia) elements.autonomia.value = data.autonomia;
+      if (data.consumo) elements.consumo.value = data.consumo;
+      if (data.sangue) elements.sangue.value = data.sangue;
+      if (data.alergias) elements.alergias.value = data.alergias;
+      if (data.emergenciaNome) elements.emergenciaNome.value = data.emergenciaNome;
+      if (data.emergenciaTelefone) elements.emergenciaTelefone.value = data.emergenciaTelefone;
+      if (data.papel) elements.papel.value = data.papel;
+      if (data.experiencia) elements.experiencia.value = data.experiencia;
+      if (data.mapasOffline) elements.mapasOffline.value = data.mapasOffline;
+      if (data.resgateGuincho) elements.resgateGuincho.checked = data.resgateGuincho;
+      if (data.resgateCamburao) elements.resgateCamburao.checked = data.resgateCamburao;
+      if (data.resgateFerramentas) elements.resgateFerramentas.checked = data.resgateFerramentas;
+      if (data.comPx) elements.comPx.checked = data.comPx;
+      if (data.comStarlink) elements.comStarlink.checked = data.comStarlink;
+      if (data.comSat) elements.comSat.checked = data.comSat;
+      if (data.markerColor) elements.markerColor.value = data.markerColor;
+      if (data.routeColor) elements.routeColor.value = data.routeColor;
+      if (data.markerStyle) elements.markerStyle.value = data.markerStyle;
+      if (data.foto) {
+        elements.perfilPreview.style.backgroundImage = `url(${data.foto})`;
+        elements.perfilPreview.innerHTML = '';
+      }
+    }
+
+    // Coletar dados do formulário
+    function collectFormData() {
+      return {
+        nome: elements.nome.value,
+        telefone: elements.telefone.value,
+        email: elements.email.value,
+        nascimento: elements.nascimento.value,
+        veiculoTipo: elements.veiculoTipo.value,
+        veiculoPlaca: elements.veiculoPlaca.value,
+        odometro: elements.odometro.value,
+        autonomia: elements.autonomia.value,
+        consumo: elements.consumo.value,
+        sangue: elements.sangue.value,
+        alergias: elements.alergias.value,
+        emergenciaNome: elements.emergenciaNome.value,
+        emergenciaTelefone: elements.emergenciaTelefone.value,
+        papel: elements.papel.value,
+        experiencia: elements.experiencia.value,
+        mapasOffline: elements.mapasOffline.value,
+        resgateGuincho: elements.resgateGuincho.checked,
+        resgateCamburao: elements.resgateCamburao.checked,
+        resgateFerramentas: elements.resgateFerramentas.checked,
+        comPx: elements.comPx.checked,
+        comStarlink: elements.comStarlink.checked,
+        comSat: elements.comSat.checked,
+        markerColor: elements.markerColor.value,
+        routeColor: elements.routeColor.value,
+        markerStyle: elements.markerStyle.value,
+        foto: elements.perfilPreview.style.backgroundImage.slice(5, -2) || null
+      };
+    }
+
+    // Salvar perfil
+    function saveProfile() {
+      profileData = collectFormData();
+      
+      try {
+        localStorage.setItem('trilhanca_perfil', JSON.stringify(profileData));
+        showSummary('Perfil salvo com sucesso!');
+        
+        // Salvar também para compatibilidade com sistema antigo
+        localStorage.setItem('memberName', profileData.nome);
+        if (profileData.foto) localStorage.setItem('memberAvatar', profileData.foto);
+        if (profileData.markerColor) localStorage.setItem('markerColor', profileData.markerColor);
+        if (profileData.routeColor) localStorage.setItem('routeColor', profileData.routeColor);
+        
+      } catch (error) {
+        showSummary('Erro ao salvar perfil. Tente novamente.', 'error');
+      }
+    }
+
+    // Mostrar mensagem
+    function showSummary(message, type = 'success') {
+      elements.summary.textContent = message;
+      elements.summary.className = 'summary';
+      elements.summary.style.background = type === 'success' ? 
+        'linear-gradient(135deg, var(--success-color) 0%, #1e7e34 100%)' : 
+        'linear-gradient(135deg, var(--danger-color) 0%, #8b0000 100%)';
+      
+      setTimeout(() => {
+        elements.summary.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Sincronização Bluetooth
+    async function syncBluetooth() {
+      if (!navigator.bluetooth) {
+        showSummary('Bluetooth não suportado neste navegador', 'error');
+        return;
+      }
+      
+      try {
+        showSummary('Procurando dispositivos Bluetooth...', 'info');
+        const device = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: []
+        });
+        
+        showSummary(`Conectado a ${device.name || device.id}`, 'success');
+        
+      } catch (error) {
+        showSummary(`Falha na sincronização Bluetooth: ${error.message}`, 'error');
+      }
+    }
+
+    // Sincronização Serial
+    async function syncSerial() {
+      if (!('serial' in navigator)) {
+        showSummary('Web Serial não suportado neste navegador', 'error');
+        return;
+      }
+      
+      try {
+        showSummary('Procurando portas seriais...', 'info');
+        const port = await navigator.serial.requestPort();
+        
+        showSummary('Porta serial conectada com sucesso', 'success');
+        await port.close();
+        
+      } catch (error) {
+        showSummary(`Falha na sincronização Serial: ${error.message}`, 'error');
+      }
+    }
+
+    // Handle do submit
+    function handleSubmit(event) {
+      event.preventDefault();
+      saveProfile();
+    }
+
+    // Inicializar quando DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
