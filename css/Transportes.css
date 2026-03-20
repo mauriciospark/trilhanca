@@ -1,0 +1,65 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+p {
+    color: #b0b0b0;
+}
+
+.grade-veiculos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+}
+
+.veiculo-card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.veiculo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(255, 138, 52, 0.2);
+    border-color: #ff8a34;
+}
+
+.veiculo-card.selecionado {
+    border-color: #ff8a34;
+    box-shadow: 0 0 10px rgba(255, 138, 52, 0.5);
+}
+
+.veiculo-icone {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    filter: invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+}
+
+.veiculo-nome {
+    font-size: 0.9rem;
+    color: #c0c0c0;
+}

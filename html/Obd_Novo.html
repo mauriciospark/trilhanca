@@ -1,0 +1,532 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema OBD • Trilhança</title>
+    <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Obd_Novo.css">
+    <meta name="theme-color" content="#007bff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <img src="./favicoico/android-chrome-192x192.png" alt="Trilhança" class="brand-logo">
+                <div class="brand-text">
+                    <h1>Sistema OBD</h1>
+                    <span class="version">v3.0</span>
+                    <span class="subtitle">Diagnóstico Veicular Avançado</span>
+                </div>
+            </div>
+            <div class="connection-status">
+                <span id="connection-status" class="status-disconnected">
+                    <i class="fas fa-circle"></i>
+                    Desconectado
+                </span>
+                <div class="header-actions">
+                    <button class="btn-icon" id="settings-btn" title="Configurações">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button class="btn-icon" id="fullscreen-btn" title="Tela Cheia">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Painel de Conexão -->
+            <section class="card connection-panel">
+                <h2 class="card-title">
+                    <i class="fas fa-link"></i>
+                    Conexão OBD
+                </h2>
+                
+                <div class="connection-methods">
+                    <div class="method-tabs">
+                        <button class="tab-btn active" data-tab="bluetooth">
+                            <i class="fas fa-bluetooth"></i>
+                            Bluetooth
+                        </button>
+                        <button class="tab-btn" data-tab="serial">
+                            <i class="fas fa-usb"></i>
+                            USB/Serial
+                        </button>
+                        <button class="tab-btn" data-tab="wifi">
+                            <i class="fas fa-wifi"></i>
+                            WiFi
+                        </button>
+                        <button class="tab-btn" data-tab="simulator">
+                            <i class="fas fa-desktop"></i>
+                            Simulador
+                        </button>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- Bluetooth Tab -->
+                        <div class="tab-pane active" id="bluetooth-tab">
+                            <div class="connection-form">
+                                <div class="form-group">
+                                    <label>Dispositivos Bluetooth</label>
+                                    <div class="device-list" id="bluetooth-devices">
+                                        <div class="device-item">
+                                            <i class="fas fa-car"></i>
+                                            <span>Procurando dispositivos...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" id="scan-bluetooth">
+                                    <i class="fas fa-search"></i>
+                                    Escanear Dispositivos
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- USB/Serial Tab -->
+                        <div class="tab-pane" id="serial-tab">
+                            <div class="connection-form">
+                                <div class="form-group">
+                                    <label>Porta Serial</label>
+                                    <select class="form-control" id="serial-port">
+                                        <option value="">Selecione uma porta</option>
+                                        <option value="COM1">COM1</option>
+                                        <option value="COM2">COM2</option>
+                                        <option value="COM3">COM3</option>
+                                        <option value="COM4">COM4</option>
+                                        <option value="/dev/ttyUSB0">/dev/ttyUSB0</option>
+                                        <option value="/dev/ttyUSB1">/dev/ttyUSB1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Baud Rate</label>
+                                    <select class="form-control" id="baud-rate">
+                                        <option value="9600">9600</option>
+                                        <option value="38400">38400</option>
+                                        <option value="115200" selected>115200</option>
+                                        <option value="230400">230400</option>
+                                        <option value="500000">500000</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" id="connect-serial">
+                                    <i class="fas fa-plug"></i>
+                                    Conectar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- WiFi Tab -->
+                        <div class="tab-pane" id="wifi-tab">
+                            <div class="connection-form">
+                                <div class="form-group">
+                                    <label>Endereço IP</label>
+                                    <input type="text" class="form-control" id="wifi-ip" placeholder="192.168.1.100">
+                                </div>
+                                <div class="form-group">
+                                    <label>Porta</label>
+                                    <input type="number" class="form-control" id="wifi-port" placeholder="35000" value="35000">
+                                </div>
+                                <button class="btn btn-primary" id="connect-wifi">
+                                    <i class="fas fa-wifi"></i>
+                                    Conectar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Simulator Tab -->
+                        <div class="tab-pane" id="simulator-tab">
+                            <div class="simulator-info">
+                                <div class="info-card">
+                                    <i class="fas fa-desktop"></i>
+                                    <h3>Modo Simulador</h3>
+                                    <p>Use o modo simulador para testar todas as funcionalidades do sistema OBD sem necessidade de conexão com um veículo.</p>
+                                    <button class="btn btn-success" id="start-simulator">
+                                        <i class="fas fa-play"></i>
+                                        Iniciar Simulador
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Principal -->
+            <section class="dashboard-grid">
+                <!-- Velocímetro -->
+                <div class="card speedometer-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Velocímetro
+                    </h3>
+                    <div class="gauge-container">
+                        <div class="gauge" id="speed-gauge">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="speed-fill"></div>
+                                <div class="gauge-needle" id="speed-needle"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span class="gauge-value" id="speed-value">0</span>
+                                <span class="gauge-unit">km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RPM -->
+                <div class="card rpm-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-sync-alt"></i>
+                        RPM
+                    </h3>
+                    <div class="gauge-container">
+                        <div class="gauge" id="rpm-gauge">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="rpm-fill"></div>
+                                <div class="gauge-needle" id="rpm-needle"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span class="gauge-value" id="rpm-value">0</span>
+                                <span class="gauge-unit">x1000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temperatura -->
+                <div class="card temperature-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-thermometer-half"></i>
+                        Temperatura
+                    </h3>
+                    <div class="gauge-container">
+                        <div class="gauge" id="temp-gauge">
+                            <div class="gauge-body">
+                                <div class="gauge-fill" id="temp-fill"></div>
+                                <div class="gauge-needle" id="temp-needle"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span class="gauge-value" id="temp-value">85</span>
+                                <span class="gauge-unit">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combustível -->
+                <div class="card fuel-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-gas-pump"></i>
+                        Combustível
+                    </h3>
+                    <div class="fuel-gauge">
+                        <div class="fuel-tank">
+                            <div class="fuel-fill" id="fuel-fill"></div>
+                            <div class="fuel-level" id="fuel-value">75%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Odômetro -->
+                <div class="card odometer-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-road"></i>
+                        Odômetro
+                    </h3>
+                    <div class="odometer-display">
+                        <div class="odometer-value" id="odometer-value">123,456</div>
+                        <div class="odometer-unit">km</div>
+                    </div>
+                </div>
+
+                <!-- Status do Motor -->
+                <div class="card engine-status-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-cogs"></i>
+                        Status do Motor
+                    </h3>
+                    <div class="engine-status">
+                        <div class="status-item">
+                            <span class="status-label">Carga do Motor</span>
+                            <div class="status-bar">
+                                <div class="status-fill" id="engine-load-fill" style="width: 25%"></div>
+                                <span class="status-value" id="engine-load-value">25%</span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Posição do Acelerador</span>
+                            <div class="status-bar">
+                                <div class="status-fill" id="throttle-fill" style="width: 0%"></div>
+                                <span class="status-value" id="throttle-value">0%</span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Tempo de Injeção</span>
+                            <div class="status-value" id="injector-value">2.5ms</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Painel de Diagnóstico -->
+            <section class="diagnostic-panel">
+                <div class="card">
+                    <h2 class="card-title">
+                        <i class="fas fa-stethoscope"></i>
+                        Diagnóstico Avançado
+                    </h2>
+                    
+                    <div class="diagnostic-tabs">
+                        <button class="diag-tab-btn active" data-diag="codes">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Códigos de Erro
+                        </button>
+                        <button class="diag-tab-btn" data-diag="sensors">
+                            <i class="fas fa-microchip"></i>
+                            Sensores
+                        </button>
+                        <button class="diag-tab-btn" data-diag="performance">
+                            <i class="fas fa-chart-line"></i>
+                            Performance
+                        </button>
+                        <button class="diag-tab-btn" data-diag="realtime">
+                            <i class="fas fa-bolt"></i>
+                            Tempo Real
+                        </button>
+                    </div>
+
+                    <div class="diagnostic-content">
+                        <!-- Códigos de Erro -->
+                        <div class="diag-pane active" id="codes-pane">
+                            <div class="codes-section">
+                                <div class="codes-header">
+                                    <button class="btn btn-primary" id="read-codes">
+                                        <i class="fas fa-download"></i>
+                                        Ler Códigos
+                                    </button>
+                                    <button class="btn btn-danger" id="clear-codes">
+                                        <i class="fas fa-trash"></i>
+                                        Limpar Códigos
+                                    </button>
+                                </div>
+                                <div class="codes-list" id="error-codes">
+                                    <div class="no-codes">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Nenhum código de erro detectado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sensores -->
+                        <div class="diag-pane" id="sensors-pane">
+                            <div class="sensors-grid">
+                                <div class="sensor-item">
+                                    <span class="sensor-name">Sensor MAF</span>
+                                    <span class="sensor-value" id="maf-value">15.2 g/s</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <span class="sensor-name">Sensor O2</span>
+                                    <span class="sensor-value" id="o2-value">0.45V</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <span class="sensor-name">Sensor MAP</span>
+                                    <span class="sensor-value" id="map-value">101 kPa</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <span class="sensor-name">Sensor TPS</span>
+                                    <span class="sensor-value" id="tps-value">0%</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <span class="sensor-name">Temp. Ar Adm.</span>
+                                    <span class="sensor-value" id="iat-value">25°C</span>
+                                </div>
+                                <div class="sensor-item">
+                                    <span class="sensor-name">Pressão Óleo</span>
+                                    <span class="sensor-value" id="oil-pressure-value">2.5 bar</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance -->
+                        <div class="diag-pane" id="performance-pane">
+                            <div class="performance-metrics">
+                                <div class="metric-item">
+                                    <span class="metric-label">Potência Estimada</span>
+                                    <span class="metric-value" id="power-value">85 HP</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Torque Estimado</span>
+                                    <span class="metric-value" id="torque-value">120 Nm</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Consumo Médio</span>
+                                    <span class="metric-value" id="consumption-value">8.5 L/100km</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Autonomia</span>
+                                    <span class="metric-value" id="range-value">450 km</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tempo Real -->
+                        <div class="diag-pane" id="realtime-pane">
+                            <div class="realtime-data">
+                                <div class="realtime-chart">
+                                    <canvas id="realtime-canvas" width="400" height="200"></canvas>
+                                </div>
+                                <div class="realtime-controls">
+                                    <button class="btn btn-sm" id="pause-realtime">
+                                        <i class="fas fa-pause"></i>
+                                        Pausar
+                                    </button>
+                                    <button class="btn btn-sm" id="clear-realtime">
+                                        <i class="fas fa-eraser"></i>
+                                        Limpar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Log de Dados -->
+            <section class="log-panel">
+                <div class="card">
+                    <h2 class="card-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        Log de Dados
+                    </h2>
+                    
+                    <div class="log-controls">
+                        <button class="btn btn-primary" id="start-logging">
+                            <i class="fas fa-play"></i>
+                            Iniciar Gravação
+                        </button>
+                        <button class="btn btn-danger" id="stop-logging">
+                            <i class="fas fa-stop"></i>
+                            Parar Gravação
+                        </button>
+                        <button class="btn btn-secondary" id="export-log">
+                            <i class="fas fa-download"></i>
+                            Exportar
+                        </button>
+                        <button class="btn btn-secondary" id="clear-log">
+                            <i class="fas fa-trash"></i>
+                            Limpar
+                        </button>
+                    </div>
+                    
+                    <div class="log-display">
+                        <div class="log-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-database"></i>
+                                Registros: <span id="log-count">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                Duração: <span id="log-duration">00:00:00</span>
+                            </span>
+                        </div>
+                        <div class="log-entries" id="log-entries">
+                            <div class="no-logs">
+                                <i class="fas fa-info-circle"></i>
+                                <p>Nenhum registro de dados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Processando...</p>
+        </div>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Configurações</h3>
+                <button class="modal-close" id="close-settings">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h4>Configurações de Conexão</h4>
+                    <div class="form-group">
+                        <label>Timeout de Conexão (ms)</label>
+                        <input type="number" class="form-control" id="connection-timeout" value="5000">
+                    </div>
+                    <div class="form-group">
+                        <label>Intervalo de Leitura (ms)</label>
+                        <input type="number" class="form-control" id="read-interval" value="1000">
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Configurações de Exibição</h4>
+                    <div class="form-group">
+                        <label>Unidade de Velocidade</label>
+                        <select class="form-control" id="speed-unit">
+                            <option value="kmh">km/h</option>
+                            <option value="mph">mph</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Unidade de Temperatura</label>
+                        <select class="form-control" id="temp-unit">
+                            <option value="celsius">Celsius</option>
+                            <option value="fahrenheit">Fahrenheit</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Configurações de Log</h4>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="auto-log" checked>
+                            Iniciar log automaticamente
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Formato de Exportação</label>
+                        <select class="form-control" id="export-format">
+                            <option value="csv">CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="xml">XML</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="save-settings">
+                    <i class="fas fa-save"></i>
+                    Salvar Configurações
+                </button>
+                <button class="btn btn-secondary" id="reset-settings">
+                    <i class="fas fa-undo"></i>
+                    Restaurar Padrão
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Obd_Novo.js"></script>
+</body>
+</html>
+

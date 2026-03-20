@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle</title>
+    <link rel="shortcut icon" href="../icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/paineldecontrole.css">
+    <meta name="theme-color" content="#007bff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Trilhança">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <img src="../icon/favicon.ico" alt="Trilhança" class="brand-logo">
+                <div class="brand-text">
+                    <h1>Painel de Controle</h1>
+                    <span class="subtitle">Sistema Central Trilhança</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="refresh-btn" title="Atualizar">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button class="btn-icon" id="settings-btn" title="Configurações">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="btn-icon" id="notifications-btn" title="Notificações">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="btn-icon" id="logout-btn" title="Sair">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- System Overview -->
+        <section class="system-overview">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-server"></i>
+                    Visão Geral do Sistema
+                </h2>
+                <div class="system-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </span>
+                        <div class="stat-content">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Plataformas</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </span>
+                        <div class="stat-content">
+                            <span class="stat-value">1,247</span>
+                            <span class="stat-label">Usuários Ativos</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">
+                            <i class="fas fa-route"></i>
+                        </span>
+                        <div class="stat-content">
+                            <span class="stat-value">42</span>
+                            <span class="stat-label">Trilhas Ativas</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">
+                            <i class="fas fa-car"></i>
+                        </span>
+                        <div class="stat-content">
+                            <span class="stat-value">156</span>
+                            <span class="stat-label">Comboios Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Status -->
+        <section class="platform-status">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-globe"></i>
+                    Status das Plataformas
+                </h2>
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fab fa-android"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h3>Android</h3>
+                                <span class="platform-version">v2.4.1</span>
+                            </div>
+                            <div class="platform-status online">
+                                <span class="status-dot"></span>
+                                <span class="status-text">Online</span>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-value">523</span>
+                                <span class="metric-label">Usuários</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">98.5%</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">4.8</span>
+                                <span class="metric-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h3>iOS</h3>
+                                <span class="platform-version">v2.4.0</span>
+                            </div>
+                            <div class="platform-status online">
+                                <span class="status-dot"></span>
+                                <span class="status-text">Online</span>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-value">412</span>
+                                <span class="metric-label">Usuários</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">99.2%</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">4.9</span>
+                                <span class="metric-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h3>Web</h3>
+                                <span class="platform-version">v2.4.2</span>
+                            </div>
+                            <div class="platform-status online">
+                                <span class="status-dot"></span>
+                                <span class="status-text">Online</span>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-value">312</span>
+                                <span class="metric-label">Usuários</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">99.8%</span>
+                                <span class="metric-label">Uptime</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">4.7</span>
+                                <span class="metric-label">Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-time Monitoring -->
+        <section class="realtime-monitoring">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-chart-line"></i>
+                    Monitoramento em Tempo Real
+                </h2>
+                <div class="monitoring-tabs">
+                    <button class="tab-btn active" data-tab="traffic">Tráfego</button>
+                    <button class="tab-btn" data-tab="performance">Performance</button>
+                    <button class="tab-btn" data-tab="errors">Erros</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="traffic-tab">
+                        <div class="traffic-chart">
+                            <div class="chart-header">
+                                <h4>Tráfego de Usuários (Últimas 24h)</h4>
+                                <span class="chart-legend">
+                                    <span class="legend-item">
+                                        <span class="legend-color android"></span>
+                                        Android
+                                    </span>
+                                    <span class="legend-item">
+                                        <span class="legend-color ios"></span>
+                                        iOS
+                                    </span>
+                                    <span class="legend-item">
+                                        <span class="legend-color web"></span>
+                                        Web
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="trafficChart" width="800" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="performance-tab">
+                        <div class="performance-metrics">
+                            <div class="perf-card">
+                                <div class="perf-header">
+                                    <h4>Tempo de Resposta</h4>
+                                    <span class="perf-value">245ms</span>
+                                </div>
+                                <div class="perf-chart">
+                                    <div class="perf-bar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="perf-card">
+                                <div class="perf-header">
+                                    <h4>Uso de CPU</h4>
+                                    <span class="perf-value">42%</span>
+                                </div>
+                                <div class="perf-chart">
+                                    <div class="perf-bar" style="width: 42%"></div>
+                                </div>
+                            </div>
+                            <div class="perf-card">
+                                <div class="perf-header">
+                                    <h4>Memória RAM</h4>
+                                    <span class="perf-value">3.2GB</span>
+                                </div>
+                                <div class="perf-chart">
+                                    <div class="perf-bar" style="width: 64%"></div>
+                                </div>
+                            </div>
+                            <div class="perf-card">
+                                <div class="perf-header">
+                                    <h4>Storage</h4>
+                                    <span class="perf-value">78%</span>
+                                </div>
+                                <div class="perf-chart">
+                                    <div class="perf-bar" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="errors-tab">
+                        <div class="error-log">
+                            <div class="error-header">
+                                <h4>Log de Erros Recentes</h4>
+                                <button class="btn-clear" id="clear-errors">Limpar</button>
+                            </div>
+                            <div class="error-list">
+                                <div class="error-item warning">
+                                    <div class="error-time">14:32:15</div>
+                                    <div class="error-type">WARNING</div>
+                                    <div class="error-message">High latency detected on API endpoint /api/users</div>
+                                </div>
+                                <div class="error-item error">
+                                    <div class="error-time">14:28:42</div>
+                                    <div class="error-type">ERROR</div>
+                                    <div class="error-message">Database connection timeout</div>
+                                </div>
+                                <div class="error-item info">
+                                    <div class="error-time">14:25:18</div>
+                                    <div class="error-type">INFO</div>
+                                    <div class="error-message">Scheduled backup completed successfully</div>
+                                </div>
+                                <div class="error-item warning">
+                                    <div class="error-time">14:22:07</div>
+                                    <div class="error-type">WARNING</div>
+                                    <div class="error-message">Memory usage above 80% threshold</div>
+                                </div>
+                                <div class="error-item info">
+                                    <div class="error-time">14:18:33</div>
+                                    <div class="error-type">INFO</div>
+                                    <div class="error-message">New deployment completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Management -->
+        <section class="user-management">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-users-cog"></i>
+                    Gestão de Usuários
+                </h2>
+                <div class="user-controls">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar usuários..." id="user-search">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="active">Ativos</button>
+                        <button class="filter-btn" data-filter="inactive">Inativos</button>
+                        <button class="filter-btn" data-filter="premium">Premium</button>
+                    </div>
+                    <button class="btn-primary" id="add-user-btn">
+                        <i class="fas fa-plus"></i>
+                        Novo Usuário
+                    </button>
+                </div>
+                <div class="user-table">
+                    <div class="table-header">
+                        <div class="table-cell">Usuário</div>
+                        <div class="table-cell">Plataforma</div>
+                        <div class="table-cell">Status</div>
+                        <div class="table-cell">Última Atividade</div>
+                        <div class="table-cell">Ações</div>
+                    </div>
+                    <div class="table-body">
+                        <div class="table-row">
+                            <div class="table-cell user-cell">
+                                <img src="https://picsum.photos/seed/user1/40/40.jpg" alt="User" class="user-avatar">
+                                <div class="user-info">
+                                    <span class="user-name">Carlos Ferreira</span>
+                                    <span class="user-email">carlos@email.com</span>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <div class="platform-badges">
+                                    <span class="platform-badge android">A</span>
+                                    <span class="platform-badge web">W</span>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <span class="status-badge active">Ativo</span>
+                            </div>
+                            <div class="table-cell">2 min atrás</div>
+                            <div class="table-cell actions-cell">
+                                <button class="action-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn" title="Bloquear">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="action-btn" title="Detalhes">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell user-cell">
+                                <img src="https://picsum.photos/seed/user2/40/40.jpg" alt="User" class="user-avatar">
+                                <div class="user-info">
+                                    <span class="user-name">Maria Santos</span>
+                                    <span class="user-email">maria@email.com</span>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <div class="platform-badges">
+                                    <span class="platform-badge ios">i</span>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <span class="status-badge active">Ativo</span>
+                            </div>
+                            <div class="table-cell">15 min atrás</div>
+                            <div class="table-cell actions-cell">
+                                <button class="action-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn" title="Bloquear">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="action-btn" title="Detalhes">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell user-cell">
+                                <img src="https://picsum.photos/seed/user3/40/40.jpg" alt="User" class="user-avatar">
+                                <div class="user-info">
+                                    <span class="user-name">Pedro Costa</span>
+                                    <span class="user-email">pedro@email.com</span>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <div class="platform-badges">
+                                    <span class="platform-badge android">A</span>
+                                    <span class="platform-badge ios">i</span>
+                                    <span class="platform-badge web">W</span>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <span class="status-badge premium">Premium</span>
+                            </div>
+                            <div class="table-cell">1 hora atrás</div>
+                            <div class="table-cell actions-cell">
+                                <button class="action-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn" title="Bloquear">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="action-btn" title="Detalhes">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Configuration -->
+        <section class="system-config">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-sliders-h"></i>
+                    Configurações do Sistema
+                </h2>
+                <div class="config-grid">
+                    <div class="config-section">
+                        <h3>API Settings</h3>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Rate Limiting</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="rate-limit" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>CORS Enabled</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="cors" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Debug Mode</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="debug">
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="config-section">
+                        <h3>Database</h3>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Connection Pool</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="pool" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Auto Backup</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="backup" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Query Cache</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="cache" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="config-section">
+                        <h3>Notifications</h3>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Email Alerts</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="email-alerts" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>Push Notifications</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="push-notifications" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="config-item">
+                            <label class="config-label">
+                                <span>System Logs</span>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="system-logs" checked>
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="config-actions">
+                    <button class="btn-secondary" id="reset-config">
+                        <i class="fas fa-undo"></i>
+                        Restaurar Padrão
+                    </button>
+                    <button class="btn-primary" id="save-config">
+                        <i class="fas fa-save"></i>
+                        Salvar Configurações
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal show" id="user-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detalhes do Usuário</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal show" id="edit-user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Editar Usuário</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal show" id="platform-details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detalhes da Plataforma</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notifications-panel">
+        <div class="notifications-header">
+            <h3>Notificações</h3>
+        </div>
+        <div class="notifications-content">
+            <!-- Content will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Alerts Container -->
+    <div class="alerts-container" id="alerts-container">
+        <!-- Alerts will be populated by JavaScript -->
+    </div>
+
+    <!-- Connection Status -->
+    <div class="connection-status online" id="connection-status">
+        <i class="fas fa-wifi"></i>
+        <span>Online</span>
+    </div>
+
+    <script src="../js/paineldecontrole.js"></script>
+</body>
+</html>

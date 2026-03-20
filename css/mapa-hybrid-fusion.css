@@ -1,0 +1,732 @@
+/* ========================
+   MAPA HYBRID FUSION - TRILHANÇA v2.1
+   Estilos para sistema online/offline com transições suaves
+   ======================== */
+
+/* Controles de Modo Híbrido */
+.hybrid-mode-control {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    box-shadow: var(--shadow-md);
+    min-width: 200px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    justify-content: center;
+}
+
+.mode-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.mode-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+.mode-btn.active:hover {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--danger-color);
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+.status-indicator.online {
+    background: var(--success-color);
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.status-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+/* Controle de Qualidade */
+.quality-control {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    box-shadow: var(--shadow-md);
+    min-width: 180px;
+    margin-top: 0.5rem;
+}
+
+.quality-info,
+.cache-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.quality-label,
+.cache-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.quality-value,
+.cache-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.quality-value.excellent {
+    color: var(--success-color);
+}
+
+.quality-value.good {
+    color: var(--info-color);
+}
+
+.quality-value.fair {
+    color: var(--warning-color);
+}
+
+.quality-value.poor {
+    color: var(--danger-color);
+}
+
+/* Indicadores de Tiles */
+.tile-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.tile-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: tileLoading 1.5s infinite;
+}
+
+@keyframes tileLoading {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.tile-offline {
+    filter: grayscale(50%);
+    opacity: 0.8;
+}
+
+.tile-online {
+    filter: none;
+    opacity: 1;
+}
+
+.tile-placeholder {
+    background: #1a202c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Transições entre Modos */
+.layer-transition {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.layer-transition.fade-out {
+    opacity: 0;
+}
+
+.layer-transition.fade-in {
+    opacity: 1;
+}
+
+/* Notificações de Modo */
+.mode-notification {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 1002;
+    min-width: 300px;
+    animation: modeNotificationSlideIn 0.3s ease-out;
+}
+
+@keyframes modeNotificationSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.mode-notification.online {
+    border-color: var(--success-color);
+}
+
+.mode-notification.offline {
+    border-color: var(--warning-color);
+}
+
+.mode-notification.hybrid {
+    border-color: var(--info-color);
+}
+
+.mode-notification-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mode-notification-icon {
+    font-size: 1.5rem;
+}
+
+.mode-notification-text {
+    flex: 1;
+}
+
+.mode-notification-title {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+.mode-notification-message {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Status Bar Híbrida */
+.hybrid-status-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+}
+
+.hybrid-status-icon {
+    font-size: 1rem;
+}
+
+.hybrid-status-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.hybrid-status-metrics {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.hybrid-metric {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.hybrid-metric-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+}
+
+.hybrid-metric-value {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* Painel de Configuração Híbrida */
+.hybrid-settings-panel {
+    position: fixed;
+    top: 50%;
+    right: -400px;
+    transform: translateY(-50%);
+    width: 380px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+    transition: var(--transition);
+    overflow: hidden;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.hybrid-settings-panel.visible {
+    right: 20px;
+}
+
+.hybrid-settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hybrid-settings-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.hybrid-settings-content {
+    padding: 1.5rem;
+}
+
+.hybrid-setting-group {
+    margin-bottom: 1.5rem;
+}
+
+.hybrid-setting-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.hybrid-setting-description {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.hybrid-toggle {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.hybrid-toggle.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.hybrid-toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.hybrid-toggle.active .hybrid-toggle-slider {
+    transform: translateX(26px);
+}
+
+.hybrid-slider {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.hybrid-slider-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Indicadores de Sincronização */
+.sync-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 1rem;
+    box-shadow: var(--shadow-md);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 200px;
+}
+
+.sync-indicator.syncing {
+    border-color: var(--warning-color);
+}
+
+.sync-indicator.synced {
+    border-color: var(--success-color);
+}
+
+.sync-indicator.error {
+    border-color: var(--danger-color);
+}
+
+.sync-icon {
+    font-size: 1.2rem;
+    animation: syncSpin 2s linear infinite;
+}
+
+.sync-indicator.synced .sync-icon,
+.sync-indicator.error .sync-icon {
+    animation: none;
+}
+
+@keyframes syncSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.sync-text {
+    flex: 1;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.sync-count {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Métricas de Performance */
+.performance-metrics {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.performance-metric {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+.performance-metric-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.performance-metric-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.performance-metric-value.warning {
+    color: var(--warning-color);
+}
+
+.performance-metric-value.danger {
+    color: var(--danger-color);
+}
+
+/* Estados de Conexão */
+.connection-quality-excellent {
+    border-color: var(--success-color);
+}
+
+.connection-quality-good {
+    border-color: var(--info-color);
+}
+
+.connection-quality-fair {
+    border-color: var(--warning-color);
+}
+
+.connection-quality-poor {
+    border-color: var(--danger-color);
+}
+
+/* Efeitos de Transição */
+.mode-transition-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.mode-transition-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mode-transition-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.mode-transition-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hybrid-mode-control {
+        min-width: 160px;
+        padding: 0.5rem;
+    }
+    
+    .mode-buttons {
+        margin-bottom: 0.5rem;
+    }
+    
+    .mode-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .connection-status {
+        font-size: 0.75rem;
+    }
+    
+    .quality-control {
+        min-width: 160px;
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+    }
+    
+    .quality-info,
+    .cache-info {
+        font-size: 0.7rem;
+    }
+    
+    .mode-notification {
+        min-width: 250px;
+        padding: 0.75rem 1rem;
+    }
+    
+    .hybrid-status-bar {
+        bottom: 10px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+        gap: 0.5rem;
+    }
+    
+    .hybrid-status-metrics {
+        gap: 0.5rem;
+    }
+    
+    .hybrid-settings-panel {
+        width: calc(100vw - 40px);
+        right: -100vw;
+    }
+    
+    .hybrid-settings-panel.visible {
+        right: 20px;
+    }
+    
+    .sync-indicator {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+    
+    .performance-metrics {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hybrid-mode-control {
+        min-width: 140px;
+        padding: 0.4rem;
+    }
+    
+    .mode-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .connection-status {
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+    }
+    
+    .quality-control {
+        min-width: 140px;
+        padding: 0.4rem;
+    }
+    
+    .hybrid-status-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.6rem;
+    }
+    
+    .hybrid-status-metrics {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .mode-notification {
+        min-width: 200px;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .mode-notification-content {
+        gap: 0.5rem;
+    }
+    
+    .mode-notification-icon {
+        font-size: 1.2rem;
+    }
+    
+    .mode-notification-title {
+        font-size: 0.9rem;
+    }
+    
+    .mode-notification-message {
+        font-size: 0.75rem;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .hybrid-mode-control,
+    .quality-control,
+    .sync-indicator,
+    .performance-metrics {
+        border-width: 2px;
+    }
+    
+    .mode-btn {
+        border-width: 3px;
+    }
+    
+    .hybrid-toggle {
+        border-width: 2px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .mode-btn,
+    .sync-icon,
+    .tile-loading::before,
+    .mode-transition-enter-active,
+    .mode-transition-exit-active {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .hybrid-mode-control,
+    .quality-control,
+    .sync-indicator,
+    .performance-metrics,
+    .hybrid-status-bar,
+    .mode-notification {
+        display: none !important;
+    }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+    .hybrid-mode-control,
+    .quality-control,
+    .sync-indicator,
+    .performance-metrics {
+        background: rgba(0, 0, 0, 0.95);
+    }
+}

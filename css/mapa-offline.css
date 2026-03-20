@@ -1,0 +1,1607 @@
+/* ========================
+   MAPA OFFLINE COMPLETO - TRILHANÇA v2.1
+   Estilos modernos com glassmorphism, dark mode e responsividade
+   ======================== */
+
+/* Variáveis CSS */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset e Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Container Principal */
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--card-border);
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-md);
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.header-brand strong {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--card-border);
+    transition: var(--transition);
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success-color);
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.status-indicator.offline {
+    background: var(--danger-color);
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn.primary:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn.secondary {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn.small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.btn.full-width {
+    width: 100%;
+}
+
+.btn.active {
+    background: var(--success-color);
+    border-color: var(--success-color);
+}
+
+/* Layout Principal */
+.main-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 1rem;
+    margin-top: 1rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sidebars */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* Cards */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Map Container */
+.map-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.map-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.map-header h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.map-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--card-border);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.info-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.info-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#map {
+    height: 600px;
+    background: #1a1a1a;
+    position: relative;
+}
+
+.map-footer {
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+/* Form Controls */
+.control-group {
+    margin-bottom: 1rem;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: end;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* Status Grid */
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.status-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.status-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-value.online {
+    color: var(--success-color);
+}
+
+.status-value.active {
+    color: var(--info-color);
+}
+
+/* Transport Mode Info */
+.transport-mode-info {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mode-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mode-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+}
+
+.mode-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.mode-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mode-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.stat-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Geo Info */
+.geo-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.geo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.geo-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.geo-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Route Inputs */
+.route-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.route-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Odometer */
+.odo-display {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+}
+
+.odo-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+.odo-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Road Condition */
+.coords-display {
+    margin: 1rem 0;
+}
+
+/* Lists */
+.list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Empty States */
+.empty-maps {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Status Text */
+.status-text {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.status-text.success {
+    color: var(--success-color);
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.status-text.error {
+    color: var(--danger-color);
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.status-text.warning {
+    color: var(--warning-color);
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.status-text.muted {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* OBD Widget */
+.obd-widget {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    border: 1px solid var(--info-color);
+}
+
+.obd-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.obd-connection {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.obd-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.metric-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.obd-errors {
+    margin-bottom: 1rem;
+}
+
+.error-count {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: var(--radius-sm);
+    color: var(--danger-color);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #ffffff;
+}
+
+/* Carousel */
+.carousel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.carousel-item {
+    text-align: center;
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.carousel-item:hover {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.carousel-item.selected {
+    border-color: var(--primary-color);
+    background: rgba(0, 123, 255, 0.2);
+}
+
+.carousel-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.carousel-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Preview */
+.preview {
+    margin-top: 0.5rem;
+    max-width: 100%;
+}
+
+.preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--card-border);
+}
+
+/* ========================
+   ESTILOS DO MAPA OFFLINE
+   ======================== */
+
+/* Map Controls */
+.map-control {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    margin: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.control-btn i {
+    font-size: 1rem;
+}
+
+/* GPS Marker */
+.gps-marker {
+    background: transparent;
+    border: none;
+}
+
+.gps-marker-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    animation: gpsPulse 2s infinite;
+}
+
+@keyframes gpsPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.5));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.8));
+    }
+}
+
+/* Vehicle Markers */
+.vehicle-marker {
+    background: transparent;
+    border: none;
+}
+
+.vehicle-marker-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.vehicle-marker-content:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+}
+
+.vehicle-marker-content.leader {
+    border-color: var(--success-color);
+}
+
+.vehicle-marker-content.support {
+    border-color: var(--warning-color);
+}
+
+.vehicle-marker-content.medical {
+    border-color: var(--danger-color);
+}
+
+.vehicle-icon {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.vehicle-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.vehicle-distance {
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1;
+}
+
+/* Waypoint Markers */
+.waypoint-marker {
+    background: transparent;
+    border: none;
+}
+
+.waypoint-marker-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--warning-color);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.waypoint-marker-content:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+}
+
+.waypoint-marker-content.GAS {
+    border-color: var(--success-color);
+}
+
+.waypoint-marker-content.FOOD {
+    border-color: var(--info-color);
+}
+
+.waypoint-marker-content.SLEEP {
+    border-color: var(--primary-color);
+}
+
+.waypoint-marker-content.DANGER {
+    border-color: var(--danger-color);
+}
+
+.waypoint-icon {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.waypoint-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* Temporary Waypoint Marker */
+.temp-waypoint-marker {
+    background: transparent;
+    border: none;
+}
+
+.temp-marker-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    animation: tempMarkerPulse 1s infinite;
+}
+
+@keyframes tempMarkerPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Info Panel */
+.info-panel {
+    position: fixed;
+    top: 50%;
+    right: -400px;
+    transform: translateY(-50%);
+    width: 380px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.info-panel.visible {
+    right: 20px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.panel-header h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.panel-content {
+    padding: 1.5rem;
+}
+
+.vehicle-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.vehicle-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+}
+
+.vehicle-details h4 {
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.vehicle-details p {
+    margin: 0 0 0.25rem 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.vehicle-metrics {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.metric-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.metric-value {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.vehicle-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.action-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 1001;
+    min-width: 300px;
+    animation: notificationSlideIn 0.3s ease-out;
+}
+
+@keyframes notificationSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.notification.success {
+    border-color: var(--success-color);
+}
+
+.notification.error {
+    border-color: var(--danger-color);
+}
+
+.notification.warning {
+    border-color: var(--warning-color);
+}
+
+.notification.info {
+    border-color: var(--info-color);
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.notification-message {
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.notification-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Convoy Alerts */
+.convoy-alert {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: rgba(220, 53, 69, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--danger-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    min-width: 350px;
+    animation: convoyAlertSlideIn 0.3s ease-out;
+}
+
+@keyframes convoyAlertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.alert-icon {
+    font-size: 1.2rem;
+    margin-right: 0.75rem;
+}
+
+.alert-message {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.alert-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Popup Styles */
+.vehicle-popup,
+.waypoint-popup {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    min-width: 200px;
+}
+
+.vehicle-popup h4,
+.waypoint-popup h4 {
+    margin: 0 0 0.75rem 0;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.vehicle-popup p,
+.waypoint-popup p {
+    margin: 0 0 0.5rem 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.vehicle-actions,
+.waypoint-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.vehicle-actions button,
+.waypoint-actions button {
+    padding: 0.5rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.8rem;
+}
+
+.vehicle-actions button:hover,
+.waypoint-actions button:hover {
+    background: #0056b3;
+}
+
+/* ========================
+   RESPONSIVIDADE
+   ======================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 250px 1fr 250px;
+    }
+    
+    .sidebar {
+        max-height: calc(100vh - 100px);
+    }
+    
+    #map {
+        height: 500px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .sidebar {
+        max-height: none;
+        order: 2;
+    }
+    
+    .map-container {
+        order: 1;
+    }
+    
+    .right-sidebar {
+        order: 3;
+    }
+    
+    .main-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-item {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+    
+    .card h3 {
+        font-size: 1rem;
+    }
+    
+    #map {
+        height: 400px;
+    }
+    
+    .info-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .obd-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-panel {
+        width: calc(100vw - 40px);
+        right: -100vw;
+    }
+    
+    .info-panel.visible {
+        right: 20px;
+    }
+    
+    .notification,
+    .convoy-alert {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .main-header {
+        padding: 0.75rem;
+    }
+    
+    .header-brand strong {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .card {
+        padding: 0.75rem;
+    }
+    
+    .card h3 {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
+    }
+    
+    .btn.small {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .row .flex-1 {
+        width: 100%;
+    }
+    
+    #map {
+        height: 350px;
+    }
+    
+    .map-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .map-header h3 {
+        font-size: 1rem;
+    }
+    
+    .info-bar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .info-group {
+        font-size: 0.8rem;
+    }
+    
+    .odo-value {
+        font-size: 1.5rem;
+    }
+    
+    .vehicle-avatar img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .vehicle-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-btn {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* ========================
+   DARK MODE ENHANCEMENTS
+   ======================== */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --card-border: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* ========================
+   HIGH CONTRAST MODE
+   ======================== */
+
+@media (prefers-contrast: high) {
+    .card {
+        border-width: 2px;
+    }
+    
+    .btn {
+        border-width: 2px;
+    }
+    
+    .vehicle-marker-content,
+    .waypoint-marker-content {
+        border-width: 3px;
+    }
+}
+
+/* ========================
+   REDUCED MOTION
+   ======================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================
+   PRINT STYLES
+   ======================== */
+
+@media print {
+    .main-header,
+    .sidebar,
+    .map-controls,
+    .notification,
+    .convoy-alert,
+    .info-panel {
+        display: none !important;
+    }
+    
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    #map {
+        height: 500px;
+    }
+}

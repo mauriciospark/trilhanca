@@ -1,0 +1,78 @@
+name: trilhanca
+description: Super App de aventura e expedições em comboio — offline-first.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Navegação
+  go_router: ^13.0.0
+
+  # Estado
+  flutter_bloc: ^8.1.5
+  equatable: ^2.0.5
+
+  # Banco offline
+  realm: ^20.0.0
+
+  # Mapas offline
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
+
+  # GPS e sensores
+  geolocator: ^11.0.0
+  sensors_plus: ^4.0.0
+
+  # Bluetooth / Mesh
+  flutter_bluetooth_serial: ^0.4.0
+
+  # OBD-II
+  flutter_obd_plugin: ^1.0.0
+
+  # Push-to-Talk / Áudio
+  flutter_sound: ^9.2.13
+
+  # Segurança
+  flutter_secure_storage: ^9.0.0
+  encrypt: ^5.0.3
+
+  # Notificações e SOS SMS
+  flutter_local_notifications: ^17.0.0
+  telephony: ^0.2.0
+
+  # Serialização
+  json_annotation: ^4.8.1
+
+  # Utilitários
+  connectivity_plus: ^6.0.0
+  permission_handler: ^11.0.0
+  uuid: ^4.3.3
+  intl: ^0.19.0
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.7.1
+  mocktail: ^1.0.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700

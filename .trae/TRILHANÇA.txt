@@ -1,0 +1,41 @@
+criar um app com essa caracteríticas : PROJETO: Super App Expedição (OFF-ROAD SYNC)
+1. CONCEITO
+
+O primeiro "Super App" para viagens de aventura e expedições em comboio, projetado para funcionar onde a internet não chega.
+
+2. PILARES TÉCNICOS
+
+• Comunicação PTT (Push-to-Talk): Rádio via dados ou Bluetooth/Wi-Fi Direct (curto alcance).
+
+• Navegação Offline: Mapas OpenStreetMap baixáveis e alertas de perigo (atoleiros, pontes).
+
+• Gestão de Comboio: Localização em tempo real do grupo e alertas de distanciamento.
+
+3. CHECKLIST MVP
+
+• UI/UX Modo Escuro (Foco em condução).
+
+• Mapas Offline (Mapbox/MapLibre).
+
+• Comunicação Mesh (Rede sem internet).
+
+• Calculadora de combustível e gastos.
+
+4. DIFERENCIAIS
+
+• Botão SOS via SMS com GPS.
+
+• Diário de bordo automático.
+
+• Modo Transamazônica (Alertas sazonais).
+3. ALTERNATIVAS E SOLUÇÕES DE IMPLEMENTAÇÃO
+
+• Rede Mesh (Bridgefy/Google Nearby): Comunicação ponto a ponto entre telemóveis sem internet, usando Bluetooth/Wi-Fi como repetidores.
+
+• Engine de Mapas (Organic Maps/MapLibre): Navegação 100% offline baseada em OpenStreetMap.
+
+• Integração OBD-II: Ligação via Bluetooth ao carro para ler nível de combustível e telemetria em tempo real.
+
+• Conectividade Satélite: Uso das APIs nativas (Android/iOS) para mensagens de emergência e SOS em áreas remotas.
+
+• Stack Sugerida: Flutter/React Native para multiplataforma e Realm para base de dados offline-first.
