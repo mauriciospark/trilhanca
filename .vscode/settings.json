@@ -3,5 +3,6 @@
         "Trilhanca",
         "Trilhança"
     ],
-    "claudeCodeChat.permissions.yoloMode": false
+    "claudeCodeChat.permissions.yoloMode": false,
+    "liveServer.settings.port": 5501
 }
